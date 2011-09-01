@@ -15,7 +15,8 @@ Backbone.Collection.prototype.ioBindVersion = '0.1.0';
 
 /**
  * Bind and handle trigger of socket.io event.
- * NOTE: Do not use Backbone reserved event names such as 'change'.
+ * 
+ * Do not use Backbone reserved event names such as 'change'.
  * 
  * @param {String} eventName
  * @param {Socket.io Object} io
@@ -23,14 +24,18 @@ Backbone.Collection.prototype.ioBindVersion = '0.1.0';
  * @param {Object} context (optional): Object to interpret as this on callback. Binds to model instance if not provided.
  * 
  * Example Assumptions:
- *    Model definition has url: my_model
- *    Model instance has id: abc123
  * 
- * Create a new bind:
- *    model.ioBind('update', this.updateFromServer, this);
+ * * Model definition has url: my_model
+ * * Model instance has id: abc123
  * 
- * Send socket.io message on server:
- *    socket.emit('my_model/abc123:update', { title: 'My New Title' });
+ * Create a new bind (client-side):
+ * 
+ *     model.ioBind('update', this.updateView, this);
+ * 
+ * Send socket.io message (server-side)
+ * 
+ *     socket.emit( 'my_model/abc123:update', 
+ *                 { title: 'My New Title' } );
  * 
  */
 
@@ -117,7 +122,8 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
  
 /**
  * Bind and handle trigger of socket.io event.
- * NOTE: Do not use Backbone reserved event names such as 'change'.
+ * 
+ * Do not use Backbone reserved event names such as 'change'.
  * 
  * @param {String} eventName
  * @param {Socket.io Object} io
@@ -125,14 +131,18 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
  * @param {Object} context (optional): Object to interpret as this on callback. Binds to model instance if not provided.
  * 
  * Example Assumptions:
- *    Model definition has url: my_model
- *    Model instance has id: abc123
  * 
- * Create a new bind:
- *    model.ioBind('update', this.updateFromServer, this);
+ * * Model definition has url: my_model
+ * * Model instance has id: abc123
  * 
- * Send socket.io message on server:
- *    socket.emit('my_model/abc123:update', { title: 'My New Title' });
+ * Create a new bind (client-side):
+ * 
+ *     model.ioBind('update', this.updateView, this);
+ * 
+ * Send socket.io message (server-side)
+ * 
+ *     socket.emit( 'my_model/abc123:update', 
+ *                 { title: 'My New Title' } );
  * 
  */
  
