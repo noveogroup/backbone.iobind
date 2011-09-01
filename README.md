@@ -90,7 +90,7 @@ var Todos = Backbone.Collection.extend({
 	}
 });
 
-// And on the server. Note that collection events to include the model id in the event path.
+// And on the server. Note that collection events do not include the model id in the event path.
 socket.emit('todos:create', todo_obj);
 ```
 
