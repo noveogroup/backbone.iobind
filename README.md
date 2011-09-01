@@ -1,4 +1,4 @@
-# Backbone.ioBind
+# Backbone.ioBind v0.1.0
 
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events. 
 
