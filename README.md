@@ -11,14 +11,14 @@ View the full api [documentation](http://logicalparadox.github.com/backbone.iobi
 
 ## Scenario
 
-Here is a quick model/collection recipe as a starting point. Do not bind to reserved backbone 
-events, such as 'change', 'remove', and 'add'. Proxy these events using different event tags 
-such as 'update', 'delete', and 'create'.
+Here is a quick model/collection recipe as a starting point. Do NOT bind to reserved backbone 
+events, such as `change`, `remove`, and `add`. Proxy these events using different event tags 
+such as `update`, `delete`, and `create`.
 
 The following is just a guideline. If you end up using it different please let me know :D
 
 ``` js
-// Start off by creating your socket.io connection.
+// Start off by creating your client-side socket.io connection.
 var socket = io.connect('http://localhost');
 ```
 
@@ -59,7 +59,7 @@ socket.emit('todos/' + todo_obj.id + ':delete', todo_obj);
 
 ### Collection
 
-In this example the client is binding to server 'create' events. Therefor, create a model instance, populate, save, then discard 
+In this example the client is binding to server `create` events. Therefor, create a model instance, populate, save, then discard 
 reference. Let the server event handle adding the new model to the collection to ensure id consistency.
 
 ``` js
@@ -96,7 +96,7 @@ socket.emit('todos:create', todo_obj);
 
 ## Protip
 
-Works great with [backbone.modelbinding](https://github.com/derickbailey/backbone.modelbinding).
+Works great with the awesome [backbone.modelbinding](https://github.com/derickbailey/backbone.modelbinding).
 
 ## License
 
