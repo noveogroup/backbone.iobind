@@ -4,6 +4,8 @@ Backbone.ioBind allows you to bind socket.io events to backbone model & collecti
 
 View the full api [documentation](http://logicalparadox.github.com/backbone.iobind/).
 
+Works well with [this replacement](https://gist.github.com/1187630) for Backbone.sync.
+
 ### Dependancies
 
 * [Socket.io](http://socket.io/) 0.7.x || 0.8.x
