@@ -213,7 +213,7 @@ Backbone.Collection.prototype.ioUnbind = function (eventName, io, callback) {
  * 
  */
  
-Backbone.Collection.prototypeioUnbindAll = function (io) {
+Backbone.Collection.prototype.ioUnbindAll = function (io) {
   var ioEvents = this._ioEvents || (this._ioEvents = {});
   for (var ev in ioEvents) {
     this.ioUnbind(ev, io);
