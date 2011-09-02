@@ -29,7 +29,7 @@ var socket = io.connect('http://localhost');
 ``` js
 // Set up your client model
 var Todo = Backbone.Model.extend({
-	urlRoot: 'todos',
+	urlRoot: 'todo',
 	initialize: function () {
 		_.bindAll(this, 'serverChange', 'serverDelete', 'modelCleanup');
 		this.ioBind('update', socket, this.serverChange, this);
