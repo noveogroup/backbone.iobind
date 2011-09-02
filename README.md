@@ -53,6 +53,10 @@ var Todo = Backbone.Model.extend({
 });
 
 // Then emit some events on the server side.
+socket.emit('todo/' + todo_obj.id + ':update', todo_obj);
+socket.emit('todo/' + todo_obj.id + ':delete', todo_obj);
+
+// If model is part of collection must also emit collection event.
 socket.emit('todos/' + todo_obj.id + ':update', todo_obj);
 socket.emit('todos/' + todo_obj.id + ':delete', todo_obj);
 ```
