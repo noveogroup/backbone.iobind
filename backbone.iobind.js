@@ -5,8 +5,8 @@
  * https://logicalparadox.github.com/backbone.iobind
  */
  
-Backbone.Model.prototype.ioBindVersion = '0.1.1';
-Backbone.Collection.prototype.ioBindVersion = '0.1.1';
+Backbone.Model.prototype.ioBindVersion = '0.1.2';
+Backbone.Collection.prototype.ioBindVersion = '0.1.2';
 /*!
  * backbone.iobind - Model
  * Copyright(c) 2011 Jake Luer <@jakeluer>
@@ -86,7 +86,7 @@ Backbone.Model.prototype.ioUnbind = function (eventName, io, callback) {
           events[i] = false;
         }
       }
-      _.compact(events);
+      events = _.compact(events);
     } else {
       this.unbind(eventName);
       io.removeAllListeners(globalName);
@@ -193,7 +193,7 @@ Backbone.Collection.prototype.ioUnbind = function (eventName, io, callback) {
           events[i] = false;
         }
       }
-      _.compact(events);
+      events = _.compact(events);
     } else {
       this.unbind(eventName);
       io.removeAllListeners(globalName);
