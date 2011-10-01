@@ -14,6 +14,8 @@ Backbone.Collection.prototype.ioBindVersion = '0.2.0';
  */
 
 /**
+ * # Model - ioBind
+ * 
  * Bind and handle trigger of socket.io event.
  * 
  * Do not use Backbone reserved event names such as 'change'.
@@ -28,11 +30,11 @@ Backbone.Collection.prototype.ioBindVersion = '0.2.0';
  * * Model definition has url: my_model
  * * Model instance has id: abc123
  * 
- * Create a new bind (client-side):
+ * ## Create a new bind (client-side):
  * 
  *     model.ioBind('update', this.updateView, this);
  * 
- * Send socket.io message (server-side)
+ * ## Send socket.io message (server-side)
  * 
  *     socket.emit( 'my_model/abc123:update', 
  *                 { title: 'My New Title' } );
@@ -62,6 +64,8 @@ Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
 };
 
 /**
+ * # Model - ioUnbind
+ * 
  * Unbind model triggers and stop listening for server events
  * for a specific event and optional callback. If callback not
  * provide will remove all callbacks for eventname.
@@ -99,6 +103,8 @@ Backbone.Model.prototype.ioUnbind = function (eventName, io, callback) {
 };
 
 /**
+ * # Model - ioUnbindAll
+ * 
  * Unbind all callbacks and server listening events
  * for the given model.
  * 
@@ -121,9 +127,11 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
  */
  
 /**
+ * # Collection - ioBind
+ * 
  * Bind and handle trigger of socket.io event.
  * 
- * Do not use Backbone reserved event names such as 'change'.
+ * Do not use Backbone reserved event names such as `change`.
  * 
  * @param {String} eventName
  * @param {Socket.io Object} io
@@ -135,11 +143,11 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
  * * Model definition has url: my_model
  * * Model instance has id: abc123
  * 
- * Create a new bind (client-side):
+ * ## Create a new bind (client-side):
  * 
  *     model.ioBind('update', this.updateView, this);
  * 
- * Send socket.io message (server-side)
+ * ## Send socket.io message (server-side)
  * 
  *     socket.emit( 'my_model/abc123:update', 
  *                 { title: 'My New Title' } );
@@ -169,6 +177,8 @@ Backbone.Collection.prototype.ioBind = function (eventName, io, callback, contex
 };
 
 /**
+ * # Collection - ioUnbind
+ * 
  * Unbind model triggers and stop listening for server events
  * for a specific event and optional callback. If callback not
  * provide will remove all callbacks for eventname.
@@ -206,6 +216,8 @@ Backbone.Collection.prototype.ioUnbind = function (eventName, io, callback) {
 };
 
 /**
+ * # Collection - ioUnbindAll
+ * 
  * Unbind all callbacks and server listening events
  * for the given model.
  * 

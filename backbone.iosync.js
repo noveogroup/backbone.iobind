@@ -24,13 +24,13 @@ Backbone.Collection.prototype.ioBindVersion = '0.2.0';
  * 
  * ## Server Side
  * 
- * socket.on('todos:create', function (data, fn) {
- *  ...
- *  fn(null, todo);
- * });
- * socket.on('todos:read', function (data, fn) { ... });
- * socket.on('todos:update', function (data, fn) { ... });
- * socket.on('todos:delete', function (data, fn) { ... });
+ *     socket.on('todos:create', function (data, fn) {
+ *      ...
+ *      fn(null, todo);
+ *     });
+ *     socket.on('todos:read', ... );
+ *     socket.on('todos:update', ... );
+ *     socket.on('todos:delete', ... );
  * 
  */
 
