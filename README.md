@@ -1,10 +1,11 @@
-# Backbone.ioBind v0.1.0
+# Backbone.ioBind v0.2.0
 
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events. 
 
-View the full api [documentation](http://logicalparadox.github.com/backbone.iobind/).
+Now includes `backbone.iosync.js`, a drop in replacement for `Backbone.sync` that uses socket.io. 
 
-Works well with [this replacement](https://gist.github.com/1187630) for Backbone.sync.
+* [View Changelog](https://github.com/logicalparadox/backbone.iobind/blob/master/History.md)
+* [View API Documentation](http://logicalparadox.github.com/backbone.iobind/)
 
 ### Dependancies
 
@@ -17,12 +18,15 @@ Here is a quick model/collection recipe as a starting point. Do NOT bind to rese
 events, such as `change`, `remove`, and `add`. Proxy these events using different event tags 
 such as `update`, `delete`, and `create`.
 
-The following is just a guideline. If you end up using it different please let me know :D
+The following is just a guideline. If you end up using it different please let me know.
 
 ``` js
 // Start off by creating your client-side socket.io connection.
-var socket = io.connect('http://localhost');
+window.socket = io.connect('http://localhost');
 ```
+
+If you are using unmodified `backbone.iosync.js`, then your connection should exists on
+`window.socket` or `Backbone.socket`.
 
 ### Model
 
@@ -32,8 +36,8 @@ var Todo = Backbone.Model.extend({
 	urlRoot: 'todo',
 	initialize: function () {
 		_.bindAll(this, 'serverChange', 'serverDelete', 'modelCleanup');
-		this.ioBind('update', socket, this.serverChange, this);
-		this.ioBind('delete', socket, this.serverDelete, this);
+		this.ioBind('update', window.socket, this.serverChange, this);
+		this.ioBind('delete', window.socket, this.serverDelete, this);
 	},
 	serverChange: function (data) {
 		// Useful to prevent loops when dealing with client-side updates (ie: forms).
@@ -49,7 +53,7 @@ var Todo = Backbone.Model.extend({
 		}
 	},
 	modelCleanup: function () {
-		this.ioUnbindAll(socket);
+		this.ioUnbindAll(window.socket);
 		return this;
 	}
 });
@@ -75,7 +79,7 @@ var Todos = Backbone.Collection.extend({
 	url: 'todos',
 	initialize: function () {
 		_.bindAll(this, 'serverCreate', 'collectionCleanup');
-		this.ioBind('create', socket, this.serverCreate, this);
+		this.ioBind('create', window.socket, this.serverCreate, this);
 	},
 	serverCreate: function (data) {
 		// make sure no duplicates, just in case
@@ -88,7 +92,7 @@ var Todos = Backbone.Collection.extend({
 		}
 	},
 	collectionCleanup: function(callback) {
-		this.ioUnbindAll(socket);
+		this.ioUnbindAll(window.socket);
 		this.each(function (model) {
 			model.modelCleanup();
 		});
