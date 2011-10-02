@@ -1,17 +1,19 @@
+
 /*!
  * backbone.iobind
  * Copyright(c) 2011 Jake Luer <@jakeluer>
  * MIT Licensed
  * https://logicalparadox.github.com/backbone.iobind
  */
- 
-Backbone.Model.prototype.ioBindVersion = '0.2.0';
-Backbone.Collection.prototype.ioBindVersion = '0.2.0';
+
+
 /*!
  * backbone.iobind - Model
  * Copyright(c) 2011 Jake Luer <@jakeluer>
  * MIT Licensed
  */
+
+Backbone.Model.prototype.ioBindVersion = '0.2.2';
 
 /**
  * # Model - ioBind
@@ -120,12 +122,16 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
   return this;
 };
 
+
+
 /*!
  * backbone.iobind - Collection
  * Copyright(c) 2011 Jake Luer <@jakeluer>
  * MIT Licensed
  */
- 
+
+Backbone.Collection.prototype.ioBindVersion = '0.2.2';
+
 /**
  * # Collection - ioBind
  * 
@@ -232,4 +238,5 @@ Backbone.Collection.prototype.ioUnbindAll = function (io) {
   }
   return this;
 };
+
 
