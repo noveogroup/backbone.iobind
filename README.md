@@ -1,4 +1,4 @@
-# Backbone.ioBind v0.2.0
+# Backbone.ioBind v0.2.2
 
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events. 
 
@@ -20,7 +20,7 @@ such as `update`, `delete`, and `create`.
 
 The following is just a guideline. If you end up using it different please let me know.
 
-``` js
+```js
 // Start off by creating your client-side socket.io connection.
 window.socket = io.connect('http://localhost');
 ```
@@ -30,7 +30,7 @@ If you are using unmodified `backbone.iosync.js`, then your connection should ex
 
 ### Model
 
-``` js
+```js
 // Set up your client model
 var Todo = Backbone.Model.extend({
 	urlRoot: 'todo',
@@ -72,7 +72,7 @@ socket.emit('todos/' + todo_obj.id + ':delete', todo_obj);
 In this example the client is binding to server `create` events. Therefor, create a model instance, populate, save, then discard 
 reference. Let the server event handle adding the new model to the collection to ensure id consistency.
 
-``` js
+```js
 // Again, client side.
 var Todos = Backbone.Collection.extend({
 	model: Todo,
@@ -103,6 +103,24 @@ var Todos = Backbone.Collection.extend({
 // And on the server. Note that collection events do not include the model id in the event path.
 socket.emit('todos:create', todo_obj);
 ```
+
+## Building
+
+Building is based on [jake](https://github.com/mde/jake).
+
+`npm install jake -g`
+
+Clone this repo:
+
+`git clone https://github.com/logicalparadox/backbone.iobind`
+
+Install development dependancies (Ie: [codex](https://github.com/logicalparadox/codex)).:
+
+`npm install`
+
+Run jake
+
+`jake` for detailed information, `jake build:all` to build all files.
 
 ## Protip
 
