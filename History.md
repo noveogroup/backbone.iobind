@@ -1,4 +1,12 @@
 
+0.2.3 / 2011-10-04 
+==================
+
+  * build at v 0.2.3
+  * jakefile codex 0.0.4 compat
+  * detects if io not passed, uses window.socket or Backbone.socket instead.
+  * comment updates for new docs
+
 0.2.2 / 2011-10-01 
 ==================
 
