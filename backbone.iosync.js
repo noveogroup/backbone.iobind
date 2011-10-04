@@ -12,17 +12,19 @@
  * Copyright(c) 2011 Jake Luer <@jakeluer>
  * MIT Licensed
  */
+ 
 
 /**
- * Replaces default Backbone.sync function with socket.io
+ * # Backbone.sync
  * 
- * ## Assumptions
+ * Replaces default Backbone.sync function with socket.io transport
  * 
- * Currently expects active socket to be located at
- * `window.socket` or `Backbone.socket`. See inline comments
- * if you want to change it.
+ * ### Assumptions
  * 
- * ## Server Side
+ * Currently expects active socket to be located at `window.socket` 
+ * or `Backbone.socket`. See inline comments if you want to change it.
+ * 
+ * ### Server Side
  * 
  *     socket.on('todos:create', function (data, fn) {
  *      ...
@@ -33,7 +35,6 @@
  *     socket.on('todos:delete', ... );
  * 
  */
-
 Backbone.sync = function (method, model, options) {
   var getUrl = function (object) {
     if (!(object && object.url)) return null;
