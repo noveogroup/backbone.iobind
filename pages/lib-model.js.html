@@ -1,0 +1,90 @@
+<h2>lib/model.js</h2><div id="comments"><div class="comment"><div class="summary"><h1>ioBind</h1></div><ul class="tags"><li><span class="type">param:</span>{
+<span class="types">String</span>}
+<span class="name">eventName</span><span class="description"></span></li><li><span class="type">param:</span>{
+<span class="types">Object</span>}
+<span class="name">io</span><span class="description">from active socket.io connection</span></li><li><span class="type">param:</span>{
+<span class="types">Function</span>}
+<span class="name">callback</span><span class="description"></span></li><li><span class="type">param:</span>{
+<span class="types">Object</span>}
+<span class="name">context</span><span class="description">(optional) object to interpret as this on callback</span></li></ul><div class="body"><p>Bind and handle trigger of socket.io events for models.</p>
+
+<h3>Guidelines</h3>
+
+<p>Do NOT bind to reserved backbone events, such as <code>change</code>, <code>remove</code>, and <code>add</code>. </p>
+
+<p>Proxy these events using different event tags such as <code>update</code>, <code>delete</code>, and <code>create</code>.</p>
+
+<h3>Example</h3>
+
+<ul>
+<li>Model definition has url: <code>my_model</code></li>
+<li>Model instance has id: <code>abc123</code></li>
+</ul>
+
+<h4>Create a new bind (client-side):</h4>
+
+<pre><code>model.ioBind('update', window.io, this.updateView, this);
+</code></pre>
+
+<h4>Send socket.io message (server-side)</h4>
+
+<pre><code>socket.emit( 'my_model/abc123:update', { title: 'My New Title' } );
+</code></pre></div><a href="#" class="button view-source">view source</a><pre class="source"><code>Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
+  var ioEvents = this._ioEvents || (this._ioEvents = {}),
+      globalName = this.url() + ':' + eventName,
+      self = this;
+  var event = {
+    name: eventName,
+    global: globalName,
+    cbLocal: callback,
+    cbGlobal: function (data) {
+      self.trigger(eventName, data);
+    }
+  };
+  this.bind(event.name, event.cbLocal, (context || self));
+  io.on(event.global, event.cbGlobal);
+  if (!ioEvents[event.name]) {
+    ioEvents[event.name] = [event];
+  } else {
+    ioEvents[event.name].push(event);
+  }
+  return this;
+};</code></pre></div><div class="comment"><div class="summary"><h1>ioUnbind</h1></div><ul class="tags"><li><span class="type">param:</span>{
+<span class="types">String</span>}
+<span class="name">eventName</span><span class="description"></span></li><li><span class="type">param:</span>{
+<span class="types">Object</span>}
+<span class="name">io</span><span class="description">from active socket.io connection</span></li><li><span class="type">param:</span>{
+<span class="types">Function</span>}
+<span class="name">callback</span><span class="description">(optional) If callback not provided will remove all callbacks for eventname.</span></li></ul><div class="body"><p>Unbind model triggers and stop listening for server events for a specific event and optional callback. </p></div><a href="#" class="button view-source">view source</a><pre class="source"><code>Backbone.Model.prototype.ioUnbind = function (eventName, io, callback) {
+  var ioEvents = this._ioEvents || (this._ioEvents = {}),
+      globalName = this.url() + ':' + eventName,
+      self = this;
+  var events = ioEvents[eventName];
+  if (!_.isEmpty(events)) {
+    if (callback && 'function' === typeof callback) {
+      for (var i = 0, l = events.length; i < l; i++) {
+        if (callback == events[i].cbLocal) {
+          this.unbind(events[i].name, events[i].cbLocal);
+          io.removeListener(events[i].global, events[i].cbGlobal);
+          events[i] = false;
+        }
+      }
+      events = _.compact(events);
+    } else {
+      this.unbind(eventName);
+      io.removeAllListeners(globalName);
+    }
+    if (events.length === 0) {
+      delete ioEvents[eventName];
+    }
+  }
+  return this;
+};</code></pre></div><div class="comment"><div class="summary"><h1>ioUnbindAll</h1></div><ul class="tags"><li><span class="type">param:</span>{
+<span class="types">Object</span>}
+<span class="name">io</span><span class="description">from active socket.io connection</span></li></ul><div class="body"><p>Unbind all callbacks and server listening events for the given model.</p></div><a href="#" class="button view-source">view source</a><pre class="source"><code>Backbone.Model.prototype.ioUnbindAll = function (io) {
+  var ioEvents = this._ioEvents || (this._ioEvents = {});
+  for (var ev in ioEvents) {
+    this.ioUnbind(ev, io);
+  }
+  return this;
+};</code></pre></div></div>
