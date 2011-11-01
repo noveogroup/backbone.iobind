@@ -106,7 +106,7 @@ socket.emit('todos:create', todo_obj);
 
 ## Building
 
-Building is based on [jake](https://github.com/mde/jake).
+Build tool is built in [jake](https://github.com/mde/jake).
 
 `npm install jake -g`
 
@@ -130,7 +130,7 @@ Works great with the awesome [backbone.modelbinding](https://github.com/derickba
 
 (The MIT License)
 
-Copyright (c) 2011 Jake Luer
+Copyright (c) 2011 Jake Luer <jake@alogicalparadox.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
