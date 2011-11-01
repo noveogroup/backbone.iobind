@@ -1,15 +1,15 @@
 
 /*!
  * backbone.iobind
- * Copyright(c) 2011 Jake Luer <@jakeluer>
+ * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
- * https://logicalparadox.github.com/backbone.iobind
+ * https://github.com/logicalparadox/backbone.iobind
  */
 
 
 /*!
  * backbone.iobind - Backbone.sync replacement
- * Copyright(c) 2011 Jake Luer <@jakeluer>
+ * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
  
@@ -41,8 +41,8 @@ Backbone.sync = function (method, model, options) {
     return _.isFunction(object.url) ? object.url() : object.url;
   };
 
-  var cmd = getUrl(model).split('/'),
-      namespace = cmd[0];
+  var cmd = getUrl(model).split('/')
+    , namespace = (cmd[0] !== '') ? cmd[0] : cmd[1]; // if leading slash, ignore
 
   var params = _.extend({
     req: namespace + ':' + method

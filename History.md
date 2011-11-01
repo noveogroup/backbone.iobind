@@ -1,4 +1,14 @@
 
+0.2.4 / 2011-11-01 
+==================
+
+  * Merge branch 'bug/namespace'
+  * include email in header notices
+  * backbone#sync - if leading slash in url, ignore when getting as namespace. Closes #2
+  * readme tweaks
+  * readme updates for build cycle
+  * renamed codex to folio in build cycle
+
 0.2.3 / 2011-10-04 
 ==================
 

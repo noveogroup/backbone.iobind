@@ -1,22 +1,22 @@
 
 /*!
  * backbone.iobind
- * Copyright(c) 2011 Jake Luer <@jakeluer>
+ * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
- * https://logicalparadox.github.com/backbone.iobind
+ * https://github.com/logicalparadox/backbone.iobind
  */
 
 
 /*!
  * backbone.iobind - Model
- * Copyright(c) 2011 Jake Luer <@jakeluer>
+ * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
  
 /*!
  * Version
  */
-Backbone.Model.prototype.ioBindVersion = '0.2.3';
+Backbone.Model.prototype.ioBindVersion = '0.2.4';
 
 /**
  * # ioBind
@@ -145,14 +145,14 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
 
 /*!
  * backbone.iobind - Collection
- * Copyright(c) 2011 Jake Luer <@jakeluer>
+ * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
  
 /*!
  * Version
  */
-Backbone.Collection.prototype.ioBindVersion = '0.2.3';
+Backbone.Collection.prototype.ioBindVersion = '0.2.4';
 
 
 /**
