@@ -114,7 +114,7 @@ Clone this repo:
 
 `git clone https://github.com/logicalparadox/backbone.iobind`
 
-Install development dependancies (Ie: [codex](https://github.com/logicalparadox/codex)).:
+Install development/build dependancies (Ie: [folio](https://github.com/logicalparadox/folio)).:
 
 `npm install`
 
