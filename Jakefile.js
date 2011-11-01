@@ -1,7 +1,7 @@
 var path = require('path'),
     fs = require('fs'),
     color = require('colors'),
-    codex = require('codex');
+    folio = require('folio');
 
 var about = [
   '',
@@ -31,7 +31,7 @@ namespace('build', function () {
 
   desc('Build model & collection ioBindings');
   file({'backbone.iobind.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js']}, function () {
-    var binding = new codex.glossary([
+    var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'copyright.js'),
         path.join(__dirname, 'lib', 'model.js'),
         path.join(__dirname, 'lib', 'collection.js')
@@ -45,7 +45,7 @@ namespace('build', function () {
   
   desc('Minify model & collection ioBindings');
   file({'backbone.iobind.min.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js']}, function () {
-    var binding = new codex.glossary([
+    var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'model.js'),
         path.join(__dirname, 'lib', 'collection.js')
       ], { minify: true });
@@ -59,7 +59,7 @@ namespace('build', function () {
   
   desc('Build Backbone.sync replacement');
   file({'backbone.iosync.js': ['lib/copyright.js', 'lib/sync.js']}, function () {
-    var binding = new codex.glossary([
+    var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'copyright.js'),
         path.join(__dirname, 'lib', 'sync.js')
       ]);
@@ -72,7 +72,7 @@ namespace('build', function () {
   
   desc('Minify Backbone.sync replacement');
   file({'backbone.iosync.min.js': ['lib/copyright.js', 'lib/sync.js']}, function () {
-    var binding = new codex.glossary([
+    var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'sync.js')
       ], { minify: true });
     
