@@ -47,7 +47,7 @@ Or use the minimized versions.
 Please post issues to [GitHub Issues](https://github.com/logicalparadox/backbone.iobind/issues). 
 Community forum is available at the [Google Group](https://groups.google.com/group/backboneiobind).
 
-## Using the Backbone.sync Replacement
+## Using the Backbone.sync Replacement for Socket.io
 
 The Backbone.sync replacement, `backbone.iosync.js`, is a drop-in replacement for Backbone.sync that
 will make Backbone use socket.io for all normal CRUD operations. By this, anytime you `save` a model,
@@ -62,8 +62,7 @@ Here is what you need to know to use this replacement...
 
 Backbone has a dedicated attribute, `urlRoot` for models, and `url` for collections, that is used
 by the default sync method to direct AJAX request. ioSync uses this same attribute to create a
-namespace tag for that model. As with the default sync method, ioSync will default to the `url` of the 
-collection a model is a part of, if available. If not available, then it will use the models `urlRoot`.
+namespace tag for that model.
 
 *For Example:* If your collection url is 'posts' or '/posts', the events to listen for server-side will be:
 
@@ -72,12 +71,15 @@ collection a model is a part of, if available. If not available, then it will us
 * `posts:update`
 * `posts:delete`
 
-*Note: if your url has a depth of more than one, only the first will be used. Example: `/posts/comments` will still only have a namespace of `posts`.*
+As with the default sync method, for a given model, ioSync will default to the `url` of the collection
+that model is a part of, else it will use the models `urlRoot`.
+
+If your url has a depth of more than one, only the first will be used. Example: `/posts/comments` will still only have a namespace of `posts`.*
 
 ### RPC / Callbacks
 
 This replacement assumes that you are using socket.io's RPC (callback) formula for these events.
-Take, for example, this psuedo-code:
+Examine this psuedo-code:
 
 ```js
 socket.on('posts:read', function (data, callback) {
