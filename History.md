@@ -1,4 +1,26 @@
 
+0.3.0 / 2011-11-02 
+==================
+
+  * small readme changes … no runon sentences.
+  * seed locked at 0.0.10 for now
+  * example style tweaks - no extra lines
+  * jake tool has serve option
+  * readme typos
+  * major readme update
+  * Merge branch 'feature/example'
+  * ignore c9 stuffs
+  * cleanup
+  * tasks can be completed :)
+  * style changes, use buttons, not checkmarks
+  * animated remove
+  * template changes
+  * cleaner styles for example
+  * app supports add and delete
+  * dev deeps for example app
+  * git ignore
+  * starting sample express app
+
 0.2.4 / 2011-11-01 
 ==================
 
