@@ -27,13 +27,20 @@ a{color:#7bb956;text-decoration:none}
 #TodoForm{position:relative;}
 #TodoForm #add{display:inline-block;padding:.5em 1em;background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fafafa), color-stop(1, #e6e6e6));background:-webkit-linear-gradient(top, #fafafa 0%, #e6e6e6 100%);background:-moz-linear-gradient(top, #fafafa 0%, #e6e6e6 100%);background:linear-gradient(top, #fafafa 0%, #e6e6e6 100%);border:1px solid #bfbfbf;font:11px/normal helvetica,arial,freesans,clean,sans-serif;color:#262626;text-decoration:none;text-shadow:1px 1px 0 #fff;font-weight:bold;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer;position:absolute;top:7px;right:22px}
 #TodoForm #add:hover{background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #3c7ec0), color-stop(1, #3570aa));background:-webkit-linear-gradient(top, #3c7ec0 0%, #3570aa 100%);background:-moz-linear-gradient(top, #3c7ec0 0%, #3570aa 100%);background:linear-gradient(top, #3c7ec0 0%, #3570aa 100%);color:#fff;text-shadow:-1px -1px 0 #285480;border:1px solid #2d5f91}
-#TodoWrapper #TodoList{zoom:1;overflow:hidden;}
-#TodoWrapper #TodoList:before,#TodoWrapper #TodoList:after{content:"";display:table}
-#TodoWrapper #TodoList:after{clear:both}
-#TodoWrapper #TodoList .todo{background-color:#fff;border-top:1px solid #a3a3a3;position:relative;}
-#TodoWrapper #TodoList .todo:last-child{border-bottom:1px solid #a3a3a3;margin-bottom:15px}
-#TodoWrapper #TodoList .todo .title{margin-bottom:0;margin-left:50px;margin-right:50px;padding:15px;border-left:1px dotted #d4d4d4}
-#TodoWrapper #TodoList .todo .complete{position:absolute;overflow:hidden;text-indent:-1000px;width:50px;height:50px;cursor:pointer;top:0;left:0}
-#TodoWrapper #TodoList .todo .delete{position:absolute;overflow:hidden;text-indent:-1000px;width:50px;height:50px;cursor:pointer;top:0;right:0}
-footer{margin:0 15px 15px;text-align:center;border-top:1px dotted #a3a3a3;}
+#TodoWrapper #TodoList{overflow:hidden;background-color:#fff;border-top:1px solid #a3a3a3;border-bottom:1px solid #a3a3a3;min-height:50px;}
+#TodoWrapper #TodoList .todo{zoom:1;background-color:#fff;position:relative;padding:15px;border-bottom:1px dotted #d4d4d4;}
+#TodoWrapper #TodoList .todo:before,#TodoWrapper #TodoList .todo:after{content:"";display:table}
+#TodoWrapper #TodoList .todo:after{clear:both}
+#TodoWrapper #TodoList .todo:last-child{border-bottom:none}
+#TodoWrapper #TodoList .todo .button{float:left;margin-right:5px;font-size:10px;padding:0 10px 0 6px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer}
+#TodoWrapper #TodoList .todo .complete{background-color:#f9d875;color:#373936;position:relative;}
+#TodoWrapper #TodoList .todo .complete:hover .text{text-decoration:underline}
+#TodoWrapper #TodoList .todo .complete .status{background-color:#fafafa;width:12px;height:12px;margin-top:4px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;margin-right:6px;overflow:hidden;float:left}
+#TodoWrapper #TodoList .todo .complete .check{position:absolute;top:0;left:8px;display:none}
+#TodoWrapper #TodoList .todo .complete .text{float:left}
+#TodoWrapper #TodoList .todo .delete{color:#f00;}
+#TodoWrapper #TodoList .todo .delete:hover{text-decoration:underline}
+#TodoWrapper #TodoList .todo.complete h3.title{text-decoration:line-through;color:#969696}
+#TodoWrapper #TodoList .todo.complete .complete .check{display:inline-block}
+footer{margin:15px;text-align:center;border-top:1px dotted #a3a3a3;}
 footer .branding{text-transform:uppercase;font-size:10px;color:#a3a3a3;text-shadow:1px 1px 0 #fafafa;margin-top:15px}

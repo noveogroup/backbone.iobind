@@ -8,7 +8,7 @@ fez-reset()
 black = #373936
 white = darken(#fff, 2%)
 
-color1 = #e5eae7 // background
+color1 = #f9d875 // background
 color2 = #E64E1C // links
 color3 = #AB4C16 // menu links
 color4 = #7bb956 // light accent
@@ -72,44 +72,71 @@ a
 
 #TodoWrapper
   #TodoList
-    clearfix()
     overflow hidden
-    
+    background-color #fff
+    border-top 1px solid darken(white, 35%)
+    border-bottom 1px solid darken(white, 35%)
+    min-height 50px
     .todo
+      clearfix()
       background-color #fff
-      border-top 1px solid darken(white, 35%)
       position relative
+      padding 15px
+      border-bottom 1px dotted darken(white, 15%)
+      
       &:last-child
-        border-bottom 1px solid darken(white, 35%)
-        margin-bottom 15px
-      .title
-        margin-bottom 0px
-        margin-left 50px
-        margin-right 50px
-        padding 15px
-        border-left 1px dotted darken(white, 15%)
+        border-bottom none
+      
+      .button
+        float left
+        margin-right 5px
+        font-size 10px
+        padding 0px 10px 0px 6px
+        border-radius 3px
+        cursor pointer
       
       .complete
-        position absolute
-        overflow hidden
-        text-indent -1000px
-        width 50px
-        height 50px
-        cursor pointer
-        top 0px
-        left 0px
+        background-color color1
+        color black
+        position relative
+        
+        &:hover
+          .text
+            text-decoration underline
+        
+        .status
+          background-color white
+          width 12px
+          height 12px
+          margin-top 4px
+          border-radius 3px
+          margin-right 6px
+          overflow hidden
+          float left
+        .check
+          position absolute
+          top 0px
+          left 8px
+          display none
+        .text
+          float left
+      
       .delete
-        position absolute
-        overflow hidden
-        text-indent -1000px
-        width 50px
-        height 50px
-        cursor pointer
-        top 0px
-        right 0px
+        color red
+        
+        &:hover
+          text-decoration underline
+      
+      &.complete
+        h3.title
+          text-decoration line-through
+          color darken(white, 40%)
+        
+        .complete .check
+          display inline-block
 
 footer
-  margin 0px 15px 15px
+  margin 15px
   text-align center
   border-top 1px dotted darken(white, 35%)
   
