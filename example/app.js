@@ -50,18 +50,10 @@ app.configure('production', function(){
 
 var Minimal = {};
 
-Minimal.Comment = Seed.Model.extend('comment', {
-  schema: new Seed.Schema({
-    name: String,
-    body: String
-  })
-});
-
 Minimal.Todo = Seed.Model.extend('todo', {
   schema: new Seed.Schema({
     title: String,
-    completed: Boolean,
-    comments: [Minimal.Comment]
+    completed: Boolean
   })
 });
 
