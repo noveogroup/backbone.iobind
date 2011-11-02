@@ -42,7 +42,6 @@ var templateJs = new folio.glossary([
   require.resolve('jade/runtime.js'),
   path.join(__dirname, '..', 'views/templates/js/header.js'),
   path.join(__dirname, '..', 'views/templates/form.jade'),
-  path.join(__dirname, '..', 'views/templates/list.jade'),
   path.join(__dirname, '..', 'views/templates/item.jade')
 ], {
   compilers: {
