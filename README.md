@@ -1,22 +1,144 @@
-# Backbone.ioBind v0.2.2
+# Backbone.ioBind
 
-Backbone.ioBind allows you to bind socket.io events to backbone model & collection events. 
+Backbone.ioBind allows you to bind socket.io events to backbone model & collection events.
+Also includes `backbone.iosync.js`, a drop in replacement for `Backbone.sync` that uses socket.io. 
 
-Now includes `backbone.iosync.js`, a drop in replacement for `Backbone.sync` that uses socket.io. 
+### [NEW] Example Tasks Application
 
-* [View Changelog](https://github.com/logicalparadox/backbone.iobind/blob/master/History.md)
-* [View API Documentation](http://logicalparadox.github.com/backbone.iobind/)
+To help break the ice, I have put together an example application demonstrating the basics of using
+`ioSync` and `ioBind`. It is a tasks application that will keep itself syncronized across all open
+browser instances. The foundation is your cookie-cutter [Express](https://github.com/visionmedia/express) 
+server using [Seed](https://github.com/logicalparadox/seed) as an in memory data store.
+
+The app is found in the `examples` folder. 
+View the [Wiki Article](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App)
+on the example app for instructions on how to get everything set up.
+
+### Quick Links
+
+* [Changelog](https://github.com/logicalparadox/backbone.iobind/blob/master/History.md)
+* [API Documentation](http://logicalparadox.github.com/backbone.iobind/)
+* [Example App Installation](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App)
+* [Google Group](https://groups.google.com/group/backboneiobind)
 
 ### Dependancies
 
 * [Socket.io](http://socket.io/) 0.7.x || 0.8.x
 * [Backbone](http://documentcloud.github.com/backbone/) 0.5.x
 
-## Scenario
+## Usage
+
+Download and include in your projects.
+
+```html
+<script src="/js/backbone.iosync.js" />
+<script src="/js/backbone.iobind.js" />
+```
+
+Or use the minimized versions.
+
+```html
+<script src="/js/backbone.iosync.min.js" />
+<script src="/js/backbone.iobind.min.js" />
+```
+
+## Where to Get Help
+
+Please post issues to [GitHub Issues](https://github.com/logicalparadox/backbone.iobind/issues). 
+Community forum is available at the [Google Group](https://groups.google.com/group/backboneiobind).
+
+## Using the Backbone.sync Replacement
+
+The Backbone.sync replacement, `backbone.iosync.js`, is a drop-in replacement for Backbone.sync that
+will make Backbone use socket.io for all normal CRUD operations. By this, anytime you `save` a model,
+`fetch` a collection, `remove` a model, or other database operation, socket.io will be used as the
+transport.
+
+After we cover the specifics there will be a skeleton socket.io template you can use in your projects.
+
+Here is what you need to know to use this replacement...
+
+### Namespaces / Urls
+
+Backbone has a dedicated attribute, `urlRoot` for models, and `url` for collections, that is used
+by the default sync method to direct AJAX request. ioSync uses this same attribute to create a
+namespace tag for that model. As with the default sync method, ioSync will default to the `url` of the 
+collection a model is a part of, if available. If not available, then it will use the models `urlRoot`.
+
+*For Example:* If your collection url is 'posts' or '/posts', the events to listen for server-side will be:
+
+* `posts:create`
+* `posts:read`
+* `posts:update`
+* `posts:delete`
+
+*Note: if your url has a depth of more than one, only the first will be used. Example: `/posts/comments` will still only have a namespace of `posts`.*
+
+### RPC / Callbacks
+
+This replacement assumes that you are using socket.io's RPC (callback) formula for these events.
+Take, for example, this psuedo-code:
+
+```js
+socket.on('posts:read', function (data, callback) {
+  db.query({_id: data.id}, function (err, post) {
+    if (err) {
+      callback(err);
+    } else {
+      // ... some data scrubbing
+      callback(null, post);
+    }
+  });
+});
+```
+
+The callback accepts two parameters: `error` and `model`. If no error has occurred, send `null` for `error`. 
+
+The `model` should be a JSON representation of the client-side model's attributes.
+
+### Skeleton
+
+You can always use this as a starting point.
+
+```js
+io.sockets.on('connection', function (socket) {
+  
+  socket.on('todos:create', function (data, callback) {
+
+    // callback(null, json);
+  });
+  
+  socket.on('todos:read', function (data, callback) {
+
+    // callback(null, json);
+  });
+  
+  socket.on('todos:update', function (data, callback) {
+
+    // callback(null, json);
+  });
+  
+  socket.on('todos:delete', function (data, callback) {
+
+    // callback(null, json);
+  });
+  
+});
+```
+
+## Using Backbone.ioBind for Custom Events
+
+The primary function for Backbone.ioBind is to make it easy to create client-side listners
+for server-side socket.io events. The most likely use case for this is to broadcast changes
+made by one client to all other clients watching a particular data object.
 
 Here is a quick model/collection recipe as a starting point. Do NOT bind to reserved backbone 
 events, such as `change`, `remove`, and `add`. Proxy these events using different event tags 
 such as `update`, `delete`, and `create`.
+
+The following code is taken directly from the example Todo Application. If you would prefer to
+dive in to the example app, check out the 
+[wiki page on using the example app](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App).
 
 The following is just a guideline. If you end up using it different please let me know.
 
@@ -125,6 +247,12 @@ Run jake
 ## Protip
 
 Works great with the awesome [backbone.modelbinding](https://github.com/derickbailey/backbone.modelbinding).
+
+## Contributors
+
+Interested in contributing? Fork to get started. Contact [@logicalparadox](http://github.com/logicalparadox) if you are interested in being regular contributor.
+
+* Jake Luer ([Github: @logicalparadox](http://github.com/logicalparadox)) ([Twitter: @jakeluer](http://twitter.com/jakeluer)) ([Website](http://alogicalparadox.com))
 
 ## License
 
