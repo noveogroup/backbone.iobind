@@ -14,7 +14,7 @@
   "dependencies": {},
   "devDependencies": {
     "folio": "0.1.x",
-    "seed": "0.0.x",
+    "seed": "0.0.10",
     "colors": "0.5.x",
     "express": "2.5.x",
     "socket.io": "0.8.x",
