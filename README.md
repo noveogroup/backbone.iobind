@@ -31,15 +31,15 @@ on the example app for instructions on how to get everything set up.
 Download and include in your projects.
 
 ```html
-<script src="/js/backbone.iosync.js" />
-<script src="/js/backbone.iobind.js" />
+<script src="/js/backbone.iosync.js"></script>
+<script src="/js/backbone.iobind.js"></script>
 ```
 
 Or use the minimized versions.
 
 ```html
-<script src="/js/backbone.iosync.min.js" />
-<script src="/js/backbone.iobind.min.js" />
+<script src="/js/backbone.iosync.min.js"></script>
+<script src="/js/backbone.iobind.min.js"></script>
 ```
 
 ## Where to Get Help
