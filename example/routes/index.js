@@ -8,7 +8,7 @@ var path = require('path')
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Todo', layout: false });
+  res.render('index', { title: 'Done.', layout: false });
 };
 
 

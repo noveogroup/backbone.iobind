@@ -103,12 +103,15 @@ io.sockets.on('connection', function (socket) {
     callback(null, list);
   });
   
-  socket.on('todo:update', function (data, callback) {
+  socket.on('todos:update', function (data, callback) {
     var todo = db.get('/todo/' + data.id);
-    
     todo.set(data);
     
-    callback(null, todo);
+    var json = todo._attributes;
+    
+    socket.emit('todos/' + data.id + ':update', json);
+    socket.broadcast.emit('todos/' + data.id + ':update', json);
+    callback(null, json);
   });
   
   socket.on('todos:delete', function (data, callback) {

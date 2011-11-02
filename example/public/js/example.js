@@ -15,8 +15,6 @@ window.socket = io.connect('http://localhost');
 
 log(window.socket);
 
-
-
 // We are going to call our app 'Minimal'.
 var Minimal = {};
 
@@ -53,6 +51,7 @@ Minimal.Todo = Backbone.Model.extend({
   },
   serverChange: function (data) {
     // Useful to prevent loops when dealing with client-side updates (ie: forms).
+    log('change', data);
     data.fromServer = true;
     this.set(data);
   },
@@ -124,6 +123,7 @@ Minimal.TodoList = Backbone.View.extend({
     var self = this
       , width = this.$('#' + todo.id).outerWidth();
     
+    // ooh, shiny animation!
     this.$('#' + todo.id).css('width', width + 'px');
     this.$('#' + todo.id).animate({
       'margin-left': width,
@@ -145,20 +145,30 @@ Minimal.TodoListItem = Backbone.View.extend({
     'click .delete': 'deleteTodo'
   },
   initialize: function (model) {
-    _.bindAll(this, 'completeTodo', 'deleteTodo');
+    _.bindAll(this, 'setStatus', 'completeTodo', 'deleteTodo');
     this.model = model;
+    this.model.bind('change:completed', this.setStatus);
     this.render();
   },
   render: function () {
     $(this.el).html(template.item(this.model.toJSON()));
     $(this.el).attr('id', this.model.id);
+    this.setStatus();
     return this;
   },
+  setStatus: function () {
+    var status = this.model.get('completed');
+    if (status) {
+      $(this.el).addClass('complete');
+    } else {
+      $(this.el).removeClass('complete');
+    }
+  },
   completeTodo: function () {
-    
+    var status = this.model.get('completed');
+    this.model.save({ completed: !!!status });
   },
   deleteTodo: function () {
-    log('delete', this.model);
     this.model.destroy({ silent: true });
   }
 });
@@ -178,9 +188,7 @@ Minimal.TodoListForm = Backbone.View.extend({
     return this;
   },
   addTodo: function () {
-    var Todo = Minimal.Todo.extend({
-      noIoBind: true
-    });
+    var Todo = Minimal.Todo.extend({ noIoBind: true });
     
     var attrs = {
       title: this.$('#TodoInput input[name="TodoInput"]').val(),
@@ -195,8 +203,6 @@ Minimal.TodoListForm = Backbone.View.extend({
 });
 
 $(document).ready(function () {
-  
   window.app = new Minimal.App();
   Backbone.history.start();
-  
 });
