@@ -121,7 +121,20 @@ Minimal.TodoList = Backbone.View.extend({
     $(this.el).append(tdv.el);
   },
   removeTodo: function (todo) {
-    this.$('#' + todo.id).remove();
+    var self = this
+      , width = this.$('#' + todo.id).outerWidth();
+    
+    this.$('#' + todo.id).css('width', width + 'px');
+    this.$('#' + todo.id).animate({
+      'margin-left': width,
+      'opacity': 0
+    }, 200, function () {
+        self.$('#' + todo.id).animate({
+          'height': 0
+        }, 200, function () {
+            self.$('#' + todo.id).remove();
+          });
+      });
   }
 });
 
@@ -153,7 +166,7 @@ Minimal.TodoListItem = Backbone.View.extend({
 Minimal.TodoListForm = Backbone.View.extend({
   id: 'TodoForm',
   events: {
-    'click .add': 'addTodo'
+    'click .button#add': 'addTodo'
   },
   initialize: function (todos) {
     _.bindAll(this, 'addTodo');
@@ -170,11 +183,11 @@ Minimal.TodoListForm = Backbone.View.extend({
     });
     
     var attrs = {
-      title: this.$('#TodoInput').val(),
+      title: this.$('#TodoInput input[name="TodoInput"]').val(),
       completed: false
     };
     
-    this.$('#TodoInput').val('');
+    this.$('#TodoInput input[name="TodoInput"]').val('');
     
     var _todo = new Todo(attrs);
     _todo.save();
