@@ -132,5 +132,7 @@ app.get('/', routes.index);
 app.get('/js/templates.js', routes.templatejs);
 app.get('/js/vendor.js', routes.vendorjs);
 
-app.listen(1227);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+if (!module.parent) {
+  app.listen(1227);
+  console.log("Backbone.ioBind Example App listening on port %d in %s mode", app.address().port, app.settings.env);
+}

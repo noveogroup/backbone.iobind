@@ -3,6 +3,8 @@ var path = require('path'),
     color = require('colors'),
     folio = require('folio');
 
+var example = require('./example/app');
+
 var about = [
   '',
   '  |_  _. _ | |_  _ ._  _ '.blue +'   o _ |_ o._  _|'.green + '  Backbone.ioBind'.grey,
@@ -17,6 +19,12 @@ desc('About this tool.');
 task('default', function() {
   console.log('jake -T'.white + ' for all commands'.grey);
   console.log('jake' + ' build:all'.green + ' to get started'.grey);
+});
+
+desc('Serve the example app.');
+task('serve', function() {
+  example.listen(1227);
+  console.log('Example App listening on port ' + '%d'.green + ' in %s mode', example.address().port, example.settings.env.blue);
 });
 
 namespace('build', function () {
