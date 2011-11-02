@@ -1,0 +1,8 @@
+mixin field(type, id, label, value)
+  .fieldset(id=id, class='field-' + type)
+    label #{label}
+    .fieldwrap
+      input(type=type, name=id, value=value)
+
+mixin field('text', 'TodoInput', 'Create a new Todo', '')
+.button#add Add
