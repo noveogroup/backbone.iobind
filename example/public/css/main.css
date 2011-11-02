@@ -1,0 +1,20 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
+body{line-height:1;color:#000;background:#fff}
+ol,ul{list-style:none}
+table{border-collapse:separate;border-spacing:0;vertical-align:middle}
+caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
+a img{border:none}
+h1{font-size:2em;margin-bottom:.75em;line-height:1.5}
+h2{font-size:1.5em;margin-bottom:.75em;line-height:1}
+h3{font-size:1.25em;margin-bottom:1em;line-height:1.2}
+h4{font-size:1.125em;margin-bottom:1.33em;line-height:1.33}
+h5{font-weight:bold}
+h5,h6{font-size:1em;margin-bottom:1.5em;line-height:1.5}
+p,address{margin-bottom:1.5em}
+article ul{list-style:disc;margin-bottom:1.5em;}
+article ul li{margin-left:1.5em}
+code{font-family:"Bitstream Vera Sans Mono","Courier",monospace}
+body{font:12px/21px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;background-color:#f5f5f5;color:#373936}
+h1,h2,h3,h4,h5{font-family:"Palatino Linotype","Book Antiqua",Palatino,FreeSerif,serif;font-weight:normal}
+a{color:#7bb956;text-decoration:none}
+.page-wrap{width:450px;margin:30px auto;background-color:#fff;border:1px #b8b8b8 solid}
