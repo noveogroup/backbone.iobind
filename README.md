@@ -10,7 +10,7 @@ To help break the ice, I have put together an example application demonstrating 
 browser instances. The foundation is your cookie-cutter [Express](https://github.com/visionmedia/express) 
 server using [Seed](https://github.com/logicalparadox/seed) as an in memory data store.
 
-The app is found in the `examples` folder. 
+The app is found in the `example` folder. 
 View the [Wiki Article](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App)
 on the example app for instructions on how to get everything set up.
 
@@ -81,12 +81,12 @@ Take, for example, this psuedo-code:
 
 ```js
 socket.on('posts:read', function (data, callback) {
-  db.query({_id: data.id}, function (err, post) {
+  db.query({_id: data.id}, function (err, model) {
     if (err) {
       callback(err);
     } else {
       // ... some data scrubbing
-      callback(null, post);
+      callback(null, model);
     }
   });
 });
