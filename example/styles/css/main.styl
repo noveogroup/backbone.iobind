@@ -6,7 +6,7 @@ global-reset()
 fez-reset()
 
 black = #373936
-white = darken(#fff, 4%)
+white = darken(#fff, 2%)
 
 color1 = #e5eae7 // background
 color2 = #E64E1C // links
@@ -27,8 +27,95 @@ a
   color color4
   text-decoration none
 
+.fieldset
+  clearfix()
+  margin 15px
+  padding 10px
+  border 1px solid darken(white, 35%)
+  box-shadow inset 2px 2px 3px darken(white, 6%)
+  border-radius 5px
+  background #fff
+  &.field-text
+    label
+      display none
+    .fieldwrap
+      input[type='text']
+        font-size 16px
+        font-family "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif
+        width 100%
+        border 0px
+        padding 0px
+        margin 0px
+        outline none
+        background none
+
 .page-wrap
-  width 450px
+  width 400px
   margin 30px auto
-  background-color #fff
+  background-color darken(white, 2%)
   border 1px darken(white, 25%) solid
+  box-shadow 2px 2px 3px darken(white, 8%)
+  
+  header
+    margin 15px
+    text-align center
+    border-bottom 1px dotted darken(white, 35%)
+
+#TodoForm
+  position relative
+  #add
+    button-shiny()
+    cursor pointer
+    position absolute
+    top 7px
+    right 22px
+
+#TodoWrapper
+  #TodoList
+    clearfix()
+    overflow hidden
+    
+    .todo
+      background-color #fff
+      border-top 1px solid darken(white, 35%)
+      position relative
+      &:last-child
+        border-bottom 1px solid darken(white, 35%)
+        margin-bottom 15px
+      .title
+        margin-bottom 0px
+        margin-left 50px
+        margin-right 50px
+        padding 15px
+        border-left 1px dotted darken(white, 15%)
+      
+      .complete
+        position absolute
+        overflow hidden
+        text-indent -1000px
+        width 50px
+        height 50px
+        cursor pointer
+        top 0px
+        left 0px
+      .delete
+        position absolute
+        overflow hidden
+        text-indent -1000px
+        width 50px
+        height 50px
+        cursor pointer
+        top 0px
+        right 0px
+
+footer
+  margin 0px 15px 15px
+  text-align center
+  border-top 1px dotted darken(white, 35%)
+  
+  .branding
+    text-transform uppercase
+    font-size 10px
+    color darken(white, 35%)
+    text-shadow 1px 1px 0px white
+    margin-top 15px
