@@ -47,6 +47,7 @@ app.configure('production', function(){
 });
 
 // Our psuedo database, on Seed.
+// https://github.com/logicalparadox/seed
 
 var Minimal = {};
 

@@ -30,12 +30,14 @@ var vendorJs = new folio.glossary([
   path.join(__dirname, '..', '..', 'backbone.iobind.js')
 ]);
 
+// serve using express
 exports.vendorjs = folio.serve(vendorJs);
 
 /**
  * Template Javascript Package
  * 
- * compile jade
+ * We are going to use pre-compiled
+ * jade on the client-side.
  */
 
 var templateJs = new folio.glossary([
@@ -55,5 +57,6 @@ var templateJs = new folio.glossary([
   }
 });
 
+// serve using express
 exports.templatejs = folio.serve(templateJs);
 

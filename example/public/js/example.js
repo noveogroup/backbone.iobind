@@ -15,8 +15,17 @@ window.socket = io.connect('http://localhost');
 
 log(window.socket);
 
-// We are going to call our app 'Minimal'.
+// We are going to put our app in the minimal namespace.
 var Minimal = {};
+
+/**
+ * App#Router
+ * 
+ * There is only one route in this app. It creates the new 
+ * Todos Collection then passes it to the form and list views.
+ * 
+ * Then append the views to our page.
+ */
 
 Minimal.App = Backbone.Router.extend({
   routes: {
@@ -36,14 +45,29 @@ Minimal.App = Backbone.Router.extend({
   }
 });
 
+/**
+ * Todo#Model
+ * 
+ * The todo model will bind to the servers `update` and
+ * `delete` events. We broadcast these events on the completion
+ * and removing of an event.
+ * 
+ * The `noIoBind` default value of false so that models that
+ * are created via the collection are bound.
+ * 
+ */
+
 Minimal.Todo = Backbone.Model.extend({
   urlRoot: 'todo',
   noIoBind: false,
   initialize: function () {
     _.bindAll(this, 'serverChange', 'serverDelete', 'modelCleanup');
     
-    // if we are creating a new model to push to the server we don't want
-    // to iobind as we only bind new models from the server
+    /*!
+     * if we are creating a new model to push to the server we don't want
+     * to iobind as we only bind new models from the server. This is because
+     * the server assigns the id.
+     */
     if (!this.noIoBind) {
       this.ioBind('update', window.socket, this.serverChange, this);
       this.ioBind('delete', window.socket, this.serverDelete, this);
@@ -51,7 +75,6 @@ Minimal.Todo = Backbone.Model.extend({
   },
   serverChange: function (data) {
     // Useful to prevent loops when dealing with client-side updates (ie: forms).
-    log('change', data);
     data.fromServer = true;
     this.set(data);
   },
@@ -68,6 +91,15 @@ Minimal.Todo = Backbone.Model.extend({
     return this;
   }
 });
+
+
+/**
+ * Todos#Collection
+ * 
+ * The collection responds to `create` events from the 
+ * server. When a new Todo is created, the todo is broadcasted
+ * using socket.io upon creation.
+ */
 
 Minimal.Todos = Backbone.Collection.extend({
   model: Minimal.Todo,
@@ -95,15 +127,30 @@ Minimal.Todos = Backbone.Collection.extend({
   }
 });
 
+/**
+ * TodoList#View
+ * 
+ * This is the primary list of todos. It recieves the collection
+ * upon construction and will respond to events broadcasted from
+ * socket.io. 
+ */
+
 Minimal.TodoList = Backbone.View.extend({
   id: 'TodoList',
   initialize: function(todos) {
     _.bindAll(this, 'render', 'addTodo', 'removeTodo');
     
     this.todos = todos;
+    
+    // this is called upon fetch
     this.todos.bind('reset', this.render);
+    
+    // this is called when the collection adds a new todo from the server
     this.todos.bind('add', this.addTodo);
+    
+    // this is called when the collection is told to remove a todo
     this.todos.bind('remove', this.removeTodo);
+    
     this.render();
   },
   render: function () {
@@ -138,6 +185,17 @@ Minimal.TodoList = Backbone.View.extend({
   }
 });
 
+/**
+ * TodoListItem#View
+ * 
+ * This view is created for each Todo in the list. It responds
+ * to client interaction and handles displaying changes to todo model
+ * received from the server.
+ * 
+ * In our case, it recieves a specific model on construction and 
+ * binds to change events for whether the todo is completed or not. 
+ */
+
 Minimal.TodoListItem = Backbone.View.extend({
   className: 'todo',
   events: {
@@ -165,13 +223,27 @@ Minimal.TodoListItem = Backbone.View.extend({
     }
   },
   completeTodo: function () {
+    // here we toggle the completed flag. we do NOT
+    // set status (update UI) as we are waiting for
+    // the server to instruct us to do so.
     var status = this.model.get('completed');
     this.model.save({ completed: !!!status });
   },
   deleteTodo: function () {
+    // Silent is true so that we react to the server
+    // broadcasting the remove event.
     this.model.destroy({ silent: true });
   }
 });
+
+/**
+ * TodoListForm#View
+ * 
+ * This form handles adding new Todos to the server. The server
+ * then broadcasts the new Todo to all clients. We don't want our 
+ * new Model instance to ioBind as no ID has been defined so we 
+ * extend our original model and toggle our flag.
+ */
 
 Minimal.TodoListForm = Backbone.View.extend({
   id: 'TodoForm',
@@ -188,6 +260,9 @@ Minimal.TodoListForm = Backbone.View.extend({
     return this;
   },
   addTodo: function () {
+    // We don't want ioBind events to occur as there is no id.
+    // We extend Todo#Model pattern, toggling our flag, then create
+    // a new todo from that.
     var Todo = Minimal.Todo.extend({ noIoBind: true });
     
     var attrs = {
@@ -195,6 +270,7 @@ Minimal.TodoListForm = Backbone.View.extend({
       completed: false
     };
     
+    // reset the text box value
     this.$('#TodoInput input[name="TodoInput"]').val('');
     
     var _todo = new Todo(attrs);
@@ -202,6 +278,7 @@ Minimal.TodoListForm = Backbone.View.extend({
   }
 });
 
+// When the page is ready, create a new app and trigger the router.
 $(document).ready(function () {
   window.app = new Minimal.App();
   Backbone.history.start();
