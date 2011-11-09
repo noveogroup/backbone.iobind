@@ -142,8 +142,7 @@ socket.emit('todos:create', todo_obj);
 ### Usage Guidelines
 
 *Model binding without ID:* Do NOT bind to Models that do NOT have an `id` assigned. This will cause for extra listeners 
-and cause potentially large memory leak problems. Be careful when creating model instances
-on the client that have yet to have an id assigned. See the example app for one possible workaround.
+and cause potentially large memory leak problems. See the example app for one possible workaround.
 
 *Namespace construction:* When constructing the namespace, as with the the ioSync method, for a given model ioBind 
 will default to the `url` of the collectionthat model is a part of, else it will use the models `urlRoot`.
