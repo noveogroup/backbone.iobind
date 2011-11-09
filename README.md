@@ -100,107 +100,62 @@ The primary function for Backbone.ioBind is to make it easy to create client-sid
 for server-side socket.io events. The most likely use case for this is to broadcast changes
 made by one client to all other clients watching a particular data object.
 
-
-
-Here is a quick model/collection recipe as a starting point. Do NOT bind to reserved backbone 
-events, such as `change`, `remove`, and `add`. Proxy these events using different event tags 
-such as `update`, `delete`, and `create`.
-
-The following code is taken directly from the example Todo Application. If you would prefer to
-dive in to the example app, check out the 
+The example app demonstrates a very basic usage scenario. If you would like to see specific code
+examples, please check out the 
 [wiki page on using the example app](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App).
 
-The following is just a guideline. If you end up using it different please let me know.
+### ioBind
+
+The ioBind function is available for both Models and Collections, and behaves almost identically in both scenarios
 
 ```js
-// Start off by creating your client-side socket.io connection.
-window.socket = io.connect('http://localhost');
+// Example Model.extend
+urlRoot: 'todo',
+initialize: function () {
+  _.bindAll(this, 'serverChange', 'serverDelete', 'modelCleanup');
+  this.ioBind('update', window.socket, this.serverChange, this);
+  this.ioBind('delete', window.socket, this.serverDelete, this);
+}
+
+// Example Collection.exend
+url: 'todos',
+initialize: function () {
+  _.bindAll(this, 'serverCreate', 'collectionCleanup');
+  this.ioBind('create', window.socket, this.serverCreate, this);
+}
 ```
 
-If you are using unmodified `backbone.iosync.js`, then your connection should exists on
-`window.socket` or `Backbone.socket`.
+The primary difference between `ioBind` on Models and Collection is the event string that is listened for.
+On models, the event string includes the Model `id`, whereas on collection it is simply the collection namespace.
 
-### Model
+The above example will respond to the following socket.io events.
 
 ```js
-// Set up your client model
-var Todo = Backbone.Model.extend({
-	urlRoot: 'todo',
-	initialize: function () {
-		_.bindAll(this, 'serverChange', 'serverDelete', 'modelCleanup');
-		this.ioBind('update', window.socket, this.serverChange, this);
-		this.ioBind('delete', window.socket, this.serverDelete, this);
-	},
-	serverChange: function (data) {
-		// Useful to prevent loops when dealing with client-side updates (ie: forms).
-		data.fromServer = true;
-		this.set(data);
-	},
-	serverDelete: function (data) {
-		if (this.collection) {
-			this.collection.remove(this);
-		}
-		else {
-			this.trigger('remove', this);
-		}
-	},
-	modelCleanup: function () {
-		this.ioUnbindAll(window.socket);
-		return this;
-	}
-});
-
-// Then emit some events on the server side.
+// Model events
 socket.emit('todo/' + todo_obj.id + ':update', todo_obj);
 socket.emit('todo/' + todo_obj.id + ':delete', todo_obj);
 
-// If model is part of collection must also emit collection event.
-socket.emit('todos/' + todo_obj.id + ':update', todo_obj);
-socket.emit('todos/' + todo_obj.id + ':delete', todo_obj);
-```
-
-### Collection
-
-In this example the client is binding to server `create` events. Therefor, create a model instance, populate, save, then discard 
-reference. Let the server event handle adding the new model to the collection to ensure id consistency.
-
-```js
-// Again, client side.
-var Todos = Backbone.Collection.extend({
-	model: Todo,
-	url: 'todos',
-	initialize: function () {
-		_.bindAll(this, 'serverCreate', 'collectionCleanup');
-		this.ioBind('create', window.socket, this.serverCreate, this);
-	},
-	serverCreate: function (data) {
-		// make sure no duplicates, just in case
-		var exists = this.get(data.id);
-		if (!exists) {
-			this.add(data);
-		} else {
-			data.fromServer = true;
-			exists.set(data);
-		}
-	},
-	collectionCleanup: function(callback) {
-		this.ioUnbindAll(window.socket);
-		this.each(function (model) {
-			model.modelCleanup();
-		});
-		return this;
-	}
-});
-
-// And on the server. Note that collection events do not include the model id in the event path.
+// Collection events
 socket.emit('todos:create', todo_obj);
 ```
+
+#### Usage Guidelines
+
+Do NOT bind to Models that do NOT have an `id` assigned. This will cause for extra listeners 
+and cause potentially large memory leak problems. Be careful when creating model instances
+on the client that have yet to have an id assigned. See the example app for one possible workaround.
+
+When constructing the namespace, as with the the ioSync method, for a given model ioSync 
+will default to the `url` of the collectionthat model is a part of, else it will use the models `urlRoot`.
+
+Do NOT bind to reserved backbone events, such as `change`, `remove`, and `add`. Proxy these 
+events using different event tags such as `update`, `delete`, and `create`.
 
 ## Building
 
 Build tool is built in [jake](https://github.com/mde/jake).
 
-`npm install jake -g`
+`[sudo] npm install jake -g`
 
 Clone this repo:
 
@@ -222,7 +177,7 @@ Works great with the awesome [backbone.modelbinding](https://github.com/derickba
 
 Interested in contributing? Fork to get started. Contact [@logicalparadox](http://github.com/logicalparadox) if you are interested in being regular contributor.
 
-* Jake Luer ([Github: @logicalparadox](http://github.com/logicalparadox)) ([Twitter: @jakeluer](http://twitter.com/jakeluer)) ([Website](http://alogicalparadox.com))
+* Jake Luer [[Github: @logicalparadox](http://github.com/logicalparadox)] [[Twitter: @jakeluer](http://twitter.com/jakeluer)] [[Website](http://alogicalparadox.com)]
 
 ## License
 
