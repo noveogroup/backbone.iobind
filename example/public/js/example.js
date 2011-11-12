@@ -60,6 +60,7 @@ Minimal.App = Backbone.Router.extend({
 Minimal.Todo = Backbone.Model.extend({
   urlRoot: 'todo',
   noIoBind: false,
+  socket:window.socket,
   initialize: function () {
     _.bindAll(this, 'serverChange', 'serverDelete', 'modelCleanup');
     
@@ -69,8 +70,8 @@ Minimal.Todo = Backbone.Model.extend({
      * the server assigns the id.
      */
     if (!this.noIoBind) {
-      this.ioBind('update', window.socket, this.serverChange, this);
-      this.ioBind('delete', window.socket, this.serverDelete, this);
+      this.ioBind('update', this.serverChange, this);
+      this.ioBind('delete', this.serverDelete, this);
     }
   },
   serverChange: function (data) {
@@ -87,7 +88,7 @@ Minimal.Todo = Backbone.Model.extend({
     this.modelCleanup();
   },
   modelCleanup: function () {
-    this.ioUnbindAll(window.socket);
+    this.ioUnbindAll();
     return this;
   }
 });
@@ -104,9 +105,10 @@ Minimal.Todo = Backbone.Model.extend({
 Minimal.Todos = Backbone.Collection.extend({
   model: Minimal.Todo,
   url: 'todos',
+  socket:window.socket,
   initialize: function () {
     _.bindAll(this, 'serverCreate', 'collectionCleanup');
-    this.ioBind('create', window.socket, this.serverCreate, this);
+    this.ioBind('create', this.serverCreate, this);
   },
   serverCreate: function (data) {
     // make sure no duplicates, just in case
@@ -119,7 +121,7 @@ Minimal.Todos = Backbone.Collection.extend({
     }
   },
   collectionCleanup: function (callback) {
-    this.ioUnbindAll(window.socket);
+    this.ioUnbindAll();
     this.each(function (model) {
       model.modelCleanup();
     });
