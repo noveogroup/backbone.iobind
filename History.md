@@ -1,4 +1,17 @@
 
+0.3.1 / 2011-11-14 
+==================
+
+  * Merge branch 'feature/pull-3' (thanks @dodo)
+  * build pull 3
+  * update example
+  * get socket from backbone objects as well so they all can have their own socket
+  * Expanded comments in the example app.
+  * readme updates
+  * no comments model needed in example
+  * server side socket.io comments for example app
+  * Readme tweak.
+
 0.3.0 / 2011-11-02 
 ==================
 
