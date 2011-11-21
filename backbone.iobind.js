@@ -7,12 +7,26 @@
  */
 
 
+(function (undefined) {
+  // Common JS
+  var _, Backbone, exports;
+  if (typeof window === 'undefined') {
+    _ = require('underscore');
+    Backbone = require('backbone');
+    exports = module.exports = Backbone;
+  } else {
+    _ = this._;
+    Backbone = this.Backbone;
+    exports = this;
+  }
+
+
 /*!
  * backbone.iobind - Model
  * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
- 
+
 /*!
  * Version
  */
@@ -26,12 +40,11 @@ Backbone.Model.prototype.ioBindVersion = '0.3.1';
  * ### Guidelines
  * 
  * Do NOT bind to reserved backbone events, such as `change`, `remove`, and `add`. 
- * 
  * Proxy these events using different event tags such as `update`, `delete`, and `create`.
  * 
- * The socket.io socket must either exist at `window.socket` or `Backbone.socket`,
- * 
+ * The socket.io socket must either exist at `window.socket`, `Backbone.socket`, or
  * `this.socket` or it must be passed as the second argument.
+ * 
  * ### Example
  * 
  * * Model definition has url: `my_model`
@@ -49,8 +62,8 @@ Backbone.Model.prototype.ioBindVersion = '0.3.1';
  * @param {Object} io from active socket.io connection (optional)
  * @param {Function} callback
  * @param {Object} context (optional) object to interpret as this on callback
- * 
  */
+
 Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
   var ioEvents = this._ioEvents || (this._ioEvents = {}),
       globalName = this.url() + ':' + eventName,
@@ -84,13 +97,12 @@ Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
  * Unbind model triggers and stop listening for server events for a specific 
  * event and optional callback. 
  * 
- * The socket.io socket must either exist at `window.socket` or `Backbone.socket`,
+ * The socket.io socket must either exist at `window.socket`, `Backbone.socket`,
+ * or `this.socket` or it must be passed as the second argument.
  * 
- * `this.socket` or it must be passed as the second argument.
  * @param {String} eventName
  * @param {Object} io from active socket.io connection
  * @param {Function} callback (optional) If not provided will remove all callbacks for eventname.
- * 
  */
  
 Backbone.Model.prototype.ioUnbind = function (eventName, io, callback) {
@@ -128,12 +140,12 @@ Backbone.Model.prototype.ioUnbind = function (eventName, io, callback) {
  * 
  * Unbind all callbacks and server listening events for the given model.
  * 
- * The socket.io socket must either exist at `window.socket` or `Backbone.socket`,
+ * The socket.io socket must either exist at `window.socket`, `Backbone.socket`,
+ * or `this.socket` or it must be passed as the only argument.
  * 
- * `this.socket` or it must be passed as the only argument.
  * @param {Object} io from active socket.io connection
- * 
  */
+
 Backbone.Model.prototype.ioUnbindAll = function (io) {
   var ioEvents = this._ioEvents || (this._ioEvents = {});
   if (!io) io = this.socket || window.socket || Backbone.socket;
@@ -152,8 +164,8 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
 /*!
  * Version
  */
-Backbone.Collection.prototype.ioBindVersion = '0.3.1';
 
+Backbone.Collection.prototype.ioBindVersion = '0.3.1';
 
 /**
  * # ioBind
@@ -166,9 +178,9 @@ Backbone.Collection.prototype.ioBindVersion = '0.3.1';
  * 
  * Proxy these events using different event tags such as `update`, `delete`, and `create`.
  * 
- * The socket.io socket must either exist at `window.socket` or `Backbone.socket`,
+ * The socket.io socket must either exist at `window.socket`, `Backbone.socket`,
+ * or `this.socket` or it must be passed as the second argument.
  * 
- * `this.socket` or it must be passed as the second argument.
  * ### Example
  * 
  * * Model definition has url: `my_model`
@@ -186,8 +198,8 @@ Backbone.Collection.prototype.ioBindVersion = '0.3.1';
  * @param {Object} io from active socket.io connection
  * @param {Function} callback
  * @param {Object} context (optional): Object to interpret as this on callback
- * 
  */
+
 Backbone.Collection.prototype.ioBind = function (eventName, io, callback, context) {
   var ioEvents = this._ioEvents || (this._ioEvents = {}),
       globalName = this.url + ':' + eventName,
@@ -221,14 +233,14 @@ Backbone.Collection.prototype.ioBind = function (eventName, io, callback, contex
  * Unbind model triggers and stop listening for server events for a specific event 
  * and optional callback. 
  * 
- * The socket.io socket must either exist at `window.socket` or `Backbone.socket`,
+ * The socket.io socket must either exist at `window.socket`, `Backbone.socket`,
+ * or `this.socket` or it must be passed as the second argument.
  * 
- * `this.socket` or it must be passed as the second argument.
  * @param {String} eventName
  * @param {Object} io from active socket.io connection
  * @param {Function} callback (optional) If not provided will remove all callbacks for `eventName`
- * 
  */
+
 Backbone.Collection.prototype.ioUnbind = function (eventName, io, callback) {
   var ioEvents = this._ioEvents || (this._ioEvents = {}),
       globalName = this.url + ':' + eventName,
@@ -264,12 +276,12 @@ Backbone.Collection.prototype.ioUnbind = function (eventName, io, callback) {
  * 
  * Unbind all callbacks and server listening events for the given model.
  * 
- * The socket.io socket must either exist at `window.socket` or `Backbone.socket`,
+ * The socket.io socket must either exist at `window.socket`, `Backbone.socket`,
+ * or `this.socket` or it must be passed as the only argument.
  * 
- * `this.socket` or it must be passed as the only argument.
  * @param {Object} io from active socket.io connection
- * 
  */
+
 Backbone.Collection.prototype.ioUnbindAll = function (io) {
   var ioEvents = this._ioEvents || (this._ioEvents = {});
   if (!io) io = this.socket || window.socket || Backbone.socket;
@@ -280,3 +292,4 @@ Backbone.Collection.prototype.ioUnbindAll = function (io) {
 };
 
 
+})();
