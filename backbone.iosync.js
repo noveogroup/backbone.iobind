@@ -8,9 +8,9 @@
 
 
 (function (undefined) {
-  // Common JS
+  // Common JS // require JS
   var _, Backbone, exports;
-  if (typeof window === 'undefined') {
+  if (typeof window === 'undefined' || typeof require === 'function') {
     _ = require('underscore');
     Backbone = require('backbone');
     exports = module.exports = Backbone;

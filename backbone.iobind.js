@@ -8,9 +8,9 @@
 
 
 (function (undefined) {
-  // Common JS
+  // Common JS // require JS
   var _, Backbone, exports;
-  if (typeof window === 'undefined') {
+  if (typeof window === 'undefined' || typeof require === 'function') {
     _ = require('underscore');
     Backbone = require('backbone');
     exports = module.exports = Backbone;
@@ -65,9 +65,9 @@ Backbone.Model.prototype.ioBindVersion = '0.3.1';
  */
 
 Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
-  var ioEvents = this._ioEvents || (this._ioEvents = {}),
-      globalName = this.url() + ':' + eventName,
-      self = this;
+  var ioEvents = this._ioEvents || (this._ioEvents = {})
+    , globalName = this.url() + ':' + eventName
+    , self = this;
   if ('function' == typeof io) {
     context = callback;
     callback = io;
@@ -106,9 +106,8 @@ Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
  */
  
 Backbone.Model.prototype.ioUnbind = function (eventName, io, callback) {
-  var ioEvents = this._ioEvents || (this._ioEvents = {}),
-      globalName = this.url() + ':' + eventName,
-      self = this;
+  var ioEvents = this._ioEvents || (this._ioEvents = {})
+    , globalName = this.url() + ':' + eventName;
   if ('function' == typeof io) {
     callback = io;
     io = this.socket || window.socket || Backbone.socket;
@@ -201,9 +200,9 @@ Backbone.Collection.prototype.ioBindVersion = '0.3.1';
  */
 
 Backbone.Collection.prototype.ioBind = function (eventName, io, callback, context) {
-  var ioEvents = this._ioEvents || (this._ioEvents = {}),
-      globalName = this.url + ':' + eventName,
-      self = this;
+  var ioEvents = this._ioEvents || (this._ioEvents = {})
+    , globalName = this.url + ':' + eventName
+    , self = this;
   if ('function' == typeof io) {
     context = callback;
     callback = io;
@@ -242,9 +241,8 @@ Backbone.Collection.prototype.ioBind = function (eventName, io, callback, contex
  */
 
 Backbone.Collection.prototype.ioUnbind = function (eventName, io, callback) {
-  var ioEvents = this._ioEvents || (this._ioEvents = {}),
-      globalName = this.url + ':' + eventName,
-      self = this;
+  var ioEvents = this._ioEvents || (this._ioEvents = {})
+    , globalName = this.url + ':' + eventName;
   if ('function' == typeof io) {
     callback = io;
     io = this.socket || window.socket || Backbone.socket;
