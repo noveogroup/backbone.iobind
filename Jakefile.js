@@ -3,8 +3,6 @@ var path = require('path'),
     color = require('colors'),
     folio = require('folio');
 
-var example = require('./example/app');
-
 var about = [
   '',
   '  |_  _. _ | |_  _ ._  _ '.blue +'   o _ |_ o._  _|'.green + '  Backbone.ioBind'.grey,
@@ -14,7 +12,6 @@ var about = [
 
 console.log(about);
 
-
 desc('About this tool.');
 task('default', function() {
   console.log('jake -T'.white + ' for all commands'.grey);
@@ -23,6 +20,7 @@ task('default', function() {
 
 desc('Serve the example app.');
 task('serve', function() {
+  var example = require('./example/app');
   example.listen(1227);
   console.log('Example App listening on port ' + '%d'.green + ' in %s mode', example.address().port, example.settings.env.blue);
 });
@@ -38,11 +36,13 @@ namespace('build', function () {
   });
 
   desc('Build model & collection ioBindings');
-  file({'backbone.iobind.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js']}, function () {
+  file({'backbone.iobind.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'copyright.js'),
+        path.join(__dirname, 'lib', 'prefix.js'),
         path.join(__dirname, 'lib', 'model.js'),
-        path.join(__dirname, 'lib', 'collection.js')
+        path.join(__dirname, 'lib', 'collection.js'),
+        path.join(__dirname, 'lib', 'suffix.js')
       ]);
     
     binding.compile(function (err, source) {
@@ -52,11 +52,15 @@ namespace('build', function () {
   });
   
   desc('Minify model & collection ioBindings');
-  file({'backbone.iobind.min.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js']}, function () {
+  file({'backbone.iobind.min.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'model.js'),
         path.join(__dirname, 'lib', 'collection.js')
-      ], { minify: true });
+      ], { 
+        minify: true,
+        prefix: fs.readFileSync(path.join(__dirname, 'lib', 'prefix.js'), 'utf8'),
+        suffix: fs.readFileSync(path.join(__dirname, 'lib', 'suffix.js'), 'utf8')
+      });
     
     binding.compile(function (err, source) {
       var copyright = fs.readFileSync(path.join(__dirname, 'lib', 'copyright.js'));
@@ -66,10 +70,12 @@ namespace('build', function () {
   });
   
   desc('Build Backbone.sync replacement');
-  file({'backbone.iosync.js': ['lib/copyright.js', 'lib/sync.js']}, function () {
+  file({'backbone.iosync.js': ['lib/copyright.js', 'lib/sync.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'copyright.js'),
-        path.join(__dirname, 'lib', 'sync.js')
+        path.join(__dirname, 'lib', 'prefix.js'),
+        path.join(__dirname, 'lib', 'sync.js'),
+        path.join(__dirname, 'lib', 'suffix.js')
       ]);
     
     binding.compile(function (err, source) {
@@ -79,10 +85,14 @@ namespace('build', function () {
   });
   
   desc('Minify Backbone.sync replacement');
-  file({'backbone.iosync.min.js': ['lib/copyright.js', 'lib/sync.js']}, function () {
+  file({'backbone.iosync.min.js': ['lib/copyright.js', 'lib/sync.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'sync.js')
-      ], { minify: true });
+      ], { 
+        minify: true,
+        prefix: fs.readFileSync(path.join(__dirname, 'lib', 'prefix.js'), 'utf8'),
+        suffix: fs.readFileSync(path.join(__dirname, 'lib', 'suffix.js'), 'utf8')
+      });
     
     binding.compile(function (err, source) {
       var copyright = fs.readFileSync(path.join(__dirname, 'lib', 'copyright.js'));

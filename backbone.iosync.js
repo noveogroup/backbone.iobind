@@ -7,6 +7,20 @@
  */
 
 
+(function (undefined) {
+  // Common JS // require JS
+  var _, Backbone, exports;
+  if (typeof window === 'undefined' || typeof require === 'function') {
+    _ = require('underscore');
+    Backbone = require('backbone');
+    exports = module.exports = Backbone;
+  } else {
+    _ = this._;
+    Backbone = this.Backbone;
+    exports = this;
+  }
+
+
 /*!
  * backbone.iobind - Backbone.sync replacement
  * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
@@ -62,3 +76,6 @@ Backbone.sync = function (method, model, options) {
     }
   });
 };
+
+
+})();
