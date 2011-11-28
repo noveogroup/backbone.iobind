@@ -3,8 +3,6 @@ var path = require('path'),
     color = require('colors'),
     folio = require('folio');
 
-
-
 var about = [
   '',
   '  |_  _. _ | |_  _ ._  _ '.blue +'   o _ |_ o._  _|'.green + '  Backbone.ioBind'.grey,
@@ -38,7 +36,7 @@ namespace('build', function () {
   });
 
   desc('Build model & collection ioBindings');
-  file({'backbone.iobind.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js']}, function () {
+  file({'backbone.iobind.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'copyright.js'),
         path.join(__dirname, 'lib', 'prefix.js'),
@@ -54,7 +52,7 @@ namespace('build', function () {
   });
   
   desc('Minify model & collection ioBindings');
-  file({'backbone.iobind.min.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js']}, function () {
+  file({'backbone.iobind.min.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'model.js'),
         path.join(__dirname, 'lib', 'collection.js')
@@ -72,7 +70,7 @@ namespace('build', function () {
   });
   
   desc('Build Backbone.sync replacement');
-  file({'backbone.iosync.js': ['lib/copyright.js', 'lib/sync.js']}, function () {
+  file({'backbone.iosync.js': ['lib/copyright.js', 'lib/sync.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'copyright.js'),
         path.join(__dirname, 'lib', 'prefix.js'),
@@ -87,7 +85,7 @@ namespace('build', function () {
   });
   
   desc('Minify Backbone.sync replacement');
-  file({'backbone.iosync.min.js': ['lib/copyright.js', 'lib/sync.js']}, function () {
+  file({'backbone.iosync.min.js': ['lib/copyright.js', 'lib/sync.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'sync.js')
       ], { 
