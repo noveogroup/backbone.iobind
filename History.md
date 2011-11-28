@@ -1,4 +1,18 @@
 
+0.4.0 / 2011-11-28 
+==================
+
+  * Merge branch 'feature/commonjs'
+  * build using common js prefix/suffix
+  * prefix checks for require function
+  * build checks for changed prefix/suffix
+  * var cleanup
+  * no var self used in ioUnbind (model/collection)
+  * build using prefix/suffix - testing ready
+  * prefix/suffix in build tool
+  * commonjs prefix/suffix
+  * doc cleanup
+
 0.3.1 / 2011-11-14 
 ==================
 
