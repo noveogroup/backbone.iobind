@@ -3,7 +3,7 @@
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events.
 Also includes `backbone.iosync.js`, a drop in replacement for `Backbone.sync` that uses socket.io.
 
-*Current stable tag:* [0.3.1](https://github.com/logicalparadox/backbone.iobind/tree/0.3.1)
+*Current stable tag:* [0.4.0](https://github.com/logicalparadox/backbone.iobind/tree/0.4.0)
 
 #### Example Tasks Application
 
