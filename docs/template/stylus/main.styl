@@ -1,0 +1,157 @@
+@import 'nib'
+@import 'fez'
+
+global-reset()
+
+fez-reset()
+
+accent = darken(#fff, 15%)
+
+body
+  font 13px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif
+
+h1, h2, h3
+  font-family "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif
+
+h1, h3
+  color #4183C4
+
+a
+  color #cc3300
+  text-decoration none
+
+em
+  font-style italic
+  font-weight bold
+
+header, section#content, footer
+  width 740px
+  margin-left 220px
+
+header
+  clearfix()
+  margin-top 50px
+  h1
+    font-size 45px
+    a
+      color #4183C4
+  p
+    color lighten(#000, 40%)
+    font-size 22px
+    font-family "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif
+  .gh
+    clearfix()
+    background darken(#fff, 3%)
+    box-shadow 2px 2px 3px darken(#fff, 7%), inset 1px 1px 2px #fff
+    border 1px solid accent
+    padding 10px
+    position relative
+    min-height 100px
+    h4
+      text-shadow 1px 1px 0px #fff
+      margin-bottom 10px
+      color lighten(#000, 40%)
+      #latestCommitURL
+        font-size 11px
+        margin-left 10px
+    #commit
+      font-size 10px
+      margin-right 10px
+      line-height 18px
+      padding 0px 5px
+      background lighten(#000, 70%)
+      box-shadow inset 1px 1px 1px lighten(#000, 60%), 1px 1px 0px #fff
+      border-radius 3px
+      float left
+      color #fff
+      a
+        color #fff
+        font-style italic
+    #latestCommitMessage
+      line-height 20px
+      text-shadow 1px 1px 0px #fff
+    #clone
+      position absolute
+      bottom 10px
+      right 10px
+      left 10px
+      .fork
+        button-shiny(#4183C4, #fff, #cc3300)
+        cursor pointer
+        float left
+        display inline-block
+      .clone
+        color lighten(#000, 40%)
+        float left
+        display inline-block
+        margin-left 15px
+        background #fff
+        border-radius 5px
+        border 1px solid accent
+        padding 0px 15px
+        box-shadow inset 1px 1px 2px darken(#fff, 7%), 1px 1px 0px #fff
+        font 11px "Bitstream Vera Sans Mono", "Courier", monospace
+        line-height 23px
+        max-width 545px
+        overflow hidden
+    #links
+      position absolute
+      top 10px
+      right 10px
+      font-size 11px
+      line-height 18px
+      a
+        color #4183C4
+        padding 0px 10px
+        &:hover
+          text-decoration underline
+
+section#content
+  margin-top 50px
+  margin-bottom 50px
+  min-height 350px
+
+  h1
+    border-top 1px solid accent
+    padding-top 10px
+    margin-top 85px
+  p
+    code
+      padding 3px 5px
+      background darken(#fff, 10%)
+
+nav
+  position fixed
+  top 65px
+  left 30px
+  width 140px
+
+  ul
+    list-style none
+    margin-bottom 50px
+    li
+      margin-left 0px
+      text-align right
+      &.keepcase
+        a
+          text-transform none !important
+      &.header
+        font-weight bold
+      a
+        color lighten(#000, 40%)
+        font-family "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif
+        font-size 14px
+        text-transform lowercase
+        &:hover
+          text-decoration underline
+
+footer
+  margin-top 100px
+  padding-top 25px
+  margin-bottom 50px
+  border-top 1px solid accent
+  color lighten(#000, 50%)
+  text-transform lowercase
+
+@import 'scrollbar'
+@import 'code'

@@ -1,0 +1,31 @@
+{
+  "locals": {
+    "title": "Backbone.ioBind",
+    "ghuser": "logicalparadox",
+    "ghbaseurl": "/backbone.iobind",
+    "ghproject": "backbone.iobind",
+    "version": "0.4.0",
+    "hasdownloads": true,
+    "description": "ioBind is a plugin for [Backbone](http://documentcloud.github.com/backbone/) that makes it easy to bind [Socket.io](http://socket.io/) events to models and collections. This can be as easy as using the included replacement for Backbone.sync, or you can bind to your own events. Or both!"
+  },
+  "code": {
+    "model": {
+      "title": "lib/model.js",
+      "file": "../../lib/model.js",
+      "description": "Handles all model interations.",
+      "github": "https://github.com/logicalparadox/backbone.iobind/blob/master/lib/model.js"
+    },
+    "collection": {
+      "title": "lib/collection.js",
+      "file": "../../lib/collection.js",
+      "description": "Handles all collection interations.",
+      "github": "https://github.com/logicalparadox/backbone.iobind/blob/master/lib/collection.js"
+    },
+    "sync": {
+      "title": "lib/sync.js",
+      "file": "../../lib/sync.js",
+      "description": "Drip-in replacement for Backbone.sync",
+      "github": "https://github.com/logicalparadox/backbone.iobind/blob/master/lib/sync.js"
+    }
+  }
+}
