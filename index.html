@@ -1,1 +1,257 @@
-<!DOCTYPE html><html><head><title>Backbone.ioBind documentation</title><link rel="stylesheet" href="public/main.css"><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script><script src="public/main.js"></script></head><body><div id="header"><h1>Backbone.ioBind</h1><div class="description"><p>Bind socket.io events to backbone models &amp; collections. Also, drop in replacement for Backbone.sync using socket.io.</p></div><a href="https://github.com/logicalparadox/backbone.iobind" class="button github">Fork me on GitHub</a><div class="clone">git clone https://github.com/logicalparadox/backbone.iobind</div></div><div id="content"></div><ul id="files"><li><a href="/" class="nojax">home</a></li><li><a href="pages/lib-model.js.html">lib/model.js</a></li><li><a href="pages/lib-collection.js.html">lib/collection.js</a></li><li><a href="pages/lib-sync.js.html">lib/sync.js</a></li></ul></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home - Backbone.ioBind
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script src="/backbone.iobind/public/js/prettify.js"></script>
+    <script src="/backbone.iobind/public/js/main.js"></script>
+    <link rel="stylesheet" href="/backbone.iobind/public/css/main.css" type="text/css" media="all">
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet" type="text/css">
+    <script type="text/javascript">var mpq = [];
+mpq.push(["init", "475f5f9de5b14b24b0284134e00e4b1b"]);
+(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+[f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+"track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+    <script type="text/javascript">var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-26183904-3']);
+_gaq.push(['_trackPageview']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+  </head>
+  <body>
+    <nav>
+      <ul class="sections">
+        <li><a href="#installation" class="scroll">Installation</a>
+        </li>
+        <li><a href="#iosync" class="scroll">Sync Replacement</a>
+        </li>
+        <li><a href="#iobind" class="scroll">Binding Custom Events</a>
+        </li>
+        <li><a href="#usage" class="scroll">Usage Guideline</a>
+        </li>
+        <li><a href="#exampleapp" class="scroll">Example App</a>
+        </li>
+        <li><a href="#contributor" class="scroll">For Contributors</a>
+        </li>
+      </ul>
+      <ul class="code">
+        <li class="header"><a href="/backbone.iobind/code/">API Documentation</a>
+        </li>
+        <li><a href="/backbone.iobind/code/model.html">lib/model.js</a>
+        </li>
+        <li><a href="/backbone.iobind/code/collection.html">lib/collection.js</a>
+        </li>
+        <li><a href="/backbone.iobind/code/sync.html">lib/sync.js</a>
+        </li>
+      </ul>
+    </nav>
+    <header>
+      <h1><a href="/backbone.iobind">Backbone.ioBind</a>
+      </h1>
+      <div class="description"><p>ioBind is a plugin for <a href="http://documentcloud.github.com/backbone/">Backbone</a> that makes it easy to bind <a href="http://socket.io/">Socket.io</a> events to models and collections. This can be as easy as using the included replacement for Backbone.sync, or you can bind to your own events. Or both!</p>
+      </div>
+      <div class="gh">
+        <h4>Latest Update to Github
+        </h4>
+        <div id="commit"><span id="latestCommitTime">Loading...</span><a id="latestCommitURL"></a>
+        </div>
+        <div id="latestCommitMessage">Loading...
+        </div>
+        <div id="clone"><a href="https://github.com/logicalparadox/backbone.iobind" class="button fork">Fork me on GitHub</a>
+          <div class="clone">git clone https://github.com/logicalparadox/backbone.iobind.git
+          </div>
+        </div>
+        <div id="links"><a id="repoIssues" href="https://github.com/logicalparadox/backbone.iobind/issues">GitHub Issues</a><a id="repoDownload" href="https://github.com/downloads/logicalparadox/backbone.iobind/backbone.iobind-0.4.0.zip">Download v0.4.0
+</a>
+        </div>
+      </div>
+    </header>
+    <section id="content">
+      <article>
+        <h1 id="installation-section"><a name="installation">Installation</a>
+        </h1>
+        <section><p>Download and include in your projects.</p>
+
+<pre><code>&lt;script src=&quot;/js/backbone.iosync.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/backbone.iobind.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+<p>Or use the minimized versions.</p>
+
+<pre><code>&lt;script src=&quot;/js/backbone.iosync.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/backbone.iobind.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+<h3>Dependancies</h3>
+
+<ul><li><a href="http://socket.io/">Socket.io</a> 0.7.x || 0.8.x</li><li><a href="http://documentcloud.github.com/backbone/">Backbone</a> 0.5.x</li></ul>
+        </section>
+        <h1 id="iosync-section"><a name="iosync">Backbone.sync Replacement</a>
+        </h1>
+        <section><p>The Backbone.sync replacement for <a href="http://socket.io">socket.io</a>, <code>backbone.iosync.js</code>, is a drop-in replacement for Backbone.sync that
+will make Backbone use socket.io for all normal CRUD operations. By this, anytime you <code>save</code> a model,
+<code>fetch</code> a collection, <code>remove</code> a model, or other database operation, socket.io will be used as the
+transport.</p>
+
+<h3>Namespaces / Urls</h3>
+
+<p>Backbone has a dedicated attribute, <code>urlRoot</code> for models, and <code>url</code> for collections, that is used
+by the default sync method to direct AJAX request. ioSync uses this same attribute to create a
+namespace tag for that model.</p>
+
+<p><em>For Example:</em> If your collection url is &#39;posts&#39; or &#39;/posts&#39;, the events to listen for server-side will be:</p>
+
+<ul><li><code>posts:create</code></li><li><code>posts:read</code></li><li><code>posts:update</code></li><li><code>posts:delete</code></li></ul>
+
+<p>As with the default sync method, for a given model, ioSync will default to the <code>url</code> of the collection
+that model is a part of, else it will use the models <code>urlRoot</code>.</p>
+
+<p>If your url has a depth of more than one, only the first will be used. Example: <code>/posts/comments</code> will still only have a namespace of <code>posts</code>.*</p>
+
+<h3>RPC / Callbacks</h3>
+
+<p>This replacement assumes that you are using socket.io&#39;s RPC (callback) formula for these events.
+Examine this psuedo-code:</p>
+
+<pre><code>socket.on(&#39;posts:read&#39;, function (data, callback) {
+  db.query({_id: data.id}, function (err, model) {
+    if (err) {
+      callback(err);
+    } else {
+      // ... some data scrubbing
+      callback(null, model);
+    }
+  });
+});</code></pre>
+
+<p>The callback accepts two parameters: <code>error</code> and <code>model</code>. If no error has occurred, send <code>null</code> for <code>error</code>.</p>
+
+<p>The <code>model</code> should be a JSON representation of the client-side model&#39;s attributes.</p>
+        </section>
+        <h1 id="iobind-section"><a name="iobind">Binding Custom Events</a>
+        </h1>
+        <section><p>The primary function for Backbone.ioBind is to make it easy to create client-side listeners
+for server-side socket.io events. The most likely use case for this is to broadcast changes
+made by one client to all other clients watching a particular data object.</p>
+
+<p>The following samples are from the example app that demonstrates a very basic usage scenario.</p>
+
+<h3>ioBind</h3>
+
+<p>The ioBind function is available for both Models and Collections, and behaves identically in both scenarios.</p>
+
+<pre><code>// Example Model.extend
+urlRoot: &#39;todo&#39;,
+socket: window.socket,
+initialize: function () {
+  _.bindAll(this, &#39;serverChange&#39;, &#39;serverDelete&#39;, &#39;modelCleanup&#39;);
+  this.ioBind(&#39;update&#39;, this.serverChange, this);
+  this.ioBind(&#39;delete&#39;, this.serverDelete, this);
+}
+
+// Example Collection.extend
+url: &#39;todos&#39;,
+socket: window.socket,
+initialize: function () {
+  _.bindAll(this, &#39;serverCreate&#39;, &#39;collectionCleanup&#39;);
+  this.ioBind(&#39;create&#39;, this.serverCreate, this);
+}</code></pre>
+
+<p>The primary difference between <code>ioBind</code> on Models and Collection is the event string that is listened for.
+On models, the event string includes the Model <code>id</code>, whereas on collection it is simply the collection namespace.</p>
+
+<p>The above example will respond to the following socket.io events.</p>
+
+<pre><code>// Model events
+socket.emit(&#39;todo/&#39; + todo_obj.id + &#39;:update&#39;, todo_obj);
+socket.emit(&#39;todo/&#39; + todo_obj.id + &#39;:delete&#39;, todo_obj);
+
+// Collection events
+socket.emit(&#39;todos:create&#39;, todo_obj);</code></pre>
+        </section>
+        <h1 id="usage-section"><a name="usage">Usage Guideline</a>
+        </h1>
+        <section><p><em>Model binding without ID:</em> Do NOT bind to Models that do NOT have an <code>id</code> assigned. This will cause for extra listeners
+and cause potentially large memory leak problems. See the example app for one possible workaround.</p>
+
+<p><em>Namespace construction:</em> When constructing the namespace, as with the the ioSync method, for a given model ioBind
+will default to the <code>url</code> of the collectionthat model is a part of, else it will use the models <code>urlRoot</code>.</p>
+
+<p><em>Reserved events:</em> Do NOT bind to reserved backbone events, such as <code>change</code>, <code>remove</code>, and <code>add</code>. Proxy these
+events using different event tags such as <code>update</code>, <code>delete</code>, and <code>create</code>.</p>
+        </section>
+        <h1 id="exampleapp-section"><a name="exampleapp">Example App</a>
+        </h1>
+        <section><h2>Overview</h2>
+
+<p><em>Done.</em> is a task application that keeps itself synchronized across all browser instances.
+This app was built to demonstrate the basic usage of Backbone.ioBind and ioSync. The code is
+intended to be  easy to follow and is heavily commented.</p>
+
+<p><img alt="Done. An Example App" src="http://f.cl.ly/items/3d2l1D1W34311s2O3p1Q/backbone-iobind-example.png"></img></p>
+
+<h2>Installation</h2>
+
+<p>To start off, you are going to need to clone the repo.</p>
+
+<pre><code>$ git clone https://github.com/logicalparadox/backbone.iobind.git</code></pre>
+
+<p>Before you can run anything you need to install the dev dependancies, such as Express, Seed, and Socket.io.</p>
+
+<pre><code>$ cd backbone.iobind
+$ npm install</code></pre>
+
+<p>Optionally, you should install the build tool, should you want to make changes to backbone.iobind or backbone.sync for socket.io. The tool used is <code>jake</code> and it should be installed in the global npm space.</p>
+
+<pre><code>$ [sudo] npm -g install jake</code></pre>
+
+<p>If you installed jake, then simply run the following command to start up the example app.</p>
+
+<pre><code>$ jake serve</code></pre>
+
+<p><em>Note: <code>jake -T</code> shows you a list of all available commands.</em></p>
+
+<p>If you did not install jake, then start up the example app using node.</p>
+
+<pre><code>$ node example/app.js</code></pre>
+        </section>
+        <h1 id="contributor-section"><a name="contributor">For Contributors</a>
+        </h1>
+        <section><p>Please avoid making changes to the <code>dist</code> versions of backbone.iobind. All changes to the library are to be
+made to <code>lib/*.js</code> and then packaged for the browser using the build tools.</p>
+
+<h3>Building</h3>
+
+<p>Build tool is built in <a href="https://github.com/mde/jake">jake</a>.</p>
+
+<p><code>[sudo] npm install jake -g</code></p>
+
+<p>Clone this repo:</p>
+
+<p><code>git clone https://github.com/logicalparadox/backbone.iobind</code></p>
+
+<p>Install development/build dependancies (Ie: <a href="https://github.com/logicalparadox/folio)">folio</a>.:</p>
+
+<p><code>npm install</code></p>
+
+<p>Run jake</p>
+
+<p><code>jake</code> for detailed information, <code>jake build:all</code> to build all files.</p>
+        </section>
+      </article>
+    </section>
+    <footer>
+      <div class="branding">Backbone.ioBind is&nbsp;<a href="http://alogicalparadox.com">a logical paradox</a>. site generated by
+<a href="http://codexjs.com">codex.</a>
+      </div>
+    </footer>
+  </body>
+</html>
