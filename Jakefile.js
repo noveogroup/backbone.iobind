@@ -44,31 +44,31 @@ namespace('build', function () {
         path.join(__dirname, 'lib', 'collection.js'),
         path.join(__dirname, 'lib', 'suffix.js')
       ]);
-    
+
     binding.compile(function (err, source) {
       fs.writeFileSync(path.join(__dirname, 'backbone.iobind.js'), source);
       console.log('Build successful: '.green + '\tbackbone.iobind.js'.blue);
     });
   });
-  
+
   desc('Minify model & collection ioBindings');
   file({'backbone.iobind.min.js': ['lib/copyright.js', 'lib/model.js', 'lib/collection.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'model.js'),
         path.join(__dirname, 'lib', 'collection.js')
-      ], { 
+      ], {
         minify: true,
         prefix: fs.readFileSync(path.join(__dirname, 'lib', 'prefix.js'), 'utf8'),
         suffix: fs.readFileSync(path.join(__dirname, 'lib', 'suffix.js'), 'utf8')
       });
-    
+
     binding.compile(function (err, source) {
       var copyright = fs.readFileSync(path.join(__dirname, 'lib', 'copyright.js'));
       fs.writeFileSync(path.join(__dirname, 'backbone.iobind.min.js'), copyright + '\n' + source);
       console.log('Build successful: '.green + '\tbackbone.iobind.min.js'.blue);
     });
   });
-  
+
   desc('Build Backbone.sync replacement');
   file({'backbone.iosync.js': ['lib/copyright.js', 'lib/sync.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
@@ -77,23 +77,23 @@ namespace('build', function () {
         path.join(__dirname, 'lib', 'sync.js'),
         path.join(__dirname, 'lib', 'suffix.js')
       ]);
-    
+
     binding.compile(function (err, source) {
       fs.writeFileSync(path.join(__dirname, 'backbone.iosync.js'), source);
       console.log('Build successful: '.green + '\tbackbone.iosync.js'.blue);
     });
   });
-  
+
   desc('Minify Backbone.sync replacement');
   file({'backbone.iosync.min.js': ['lib/copyright.js', 'lib/sync.js', 'lib/prefix.js', 'lib/suffix.js']}, function () {
     var binding = new folio.glossary([
         path.join(__dirname, 'lib', 'sync.js')
-      ], { 
+      ], {
         minify: true,
         prefix: fs.readFileSync(path.join(__dirname, 'lib', 'prefix.js'), 'utf8'),
         suffix: fs.readFileSync(path.join(__dirname, 'lib', 'suffix.js'), 'utf8')
       });
-    
+
     binding.compile(function (err, source) {
       var copyright = fs.readFileSync(path.join(__dirname, 'lib', 'copyright.js'));
       fs.writeFileSync(path.join(__dirname, 'backbone.iosync.min.js'), copyright + '\n' + source);
