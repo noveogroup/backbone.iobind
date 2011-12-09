@@ -3,25 +3,13 @@
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events.
 Also includes `backbone.iosync.js`, a drop in replacement for `Backbone.sync` that uses socket.io.
 
-*Current stable tag:* [0.4.0](https://github.com/logicalparadox/backbone.iobind/tree/0.4.0)
-
-#### Example Tasks Application
-
-There is an example application demonstrating the basics of using the
-`ioSync` and `ioBind` components. It is a tasks application that will keep itself syncronized across all open
-browser instances. The foundation is an [Express](https://github.com/visionmedia/express) 
-server using [Seed](https://github.com/logicalparadox/seed) as an in-memory data store.
-
-The app is found in the `example` folder. 
-View the [Wiki Article](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App)
-on the example app for instructions on how to get everything set up.
+Your best best for starting is to check out the [API Documentation](http://logicalparadox.com/backbone.iobind/).
 
 #### Quick Links
 
-* [Changelog](https://github.com/logicalparadox/backbone.iobind/blob/master/History.md)
-* [API Documentation](http://logicalparadox.github.com/backbone.iobind/)
-* [Example App Installation](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App)
+* [Example App Installation](http://alogicalparadox.com/backbone.iobind/index.html#exampleapp)
 * [Google Group](https://groups.google.com/group/backboneiobind)
+* [Changelog](https://github.com/logicalparadox/backbone.iobind/blob/master/History.md)
 
 #### Dependancies
 
@@ -46,7 +34,7 @@ Or use the minimized versions.
 
 ### Where to Get Help
 
-Please post issues to [GitHub Issues](https://github.com/logicalparadox/backbone.iobind/issues). 
+Please post issues to [GitHub Issues](https://github.com/logicalparadox/backbone.iobind/issues).
 Community forum is available at the [Google Group](https://groups.google.com/group/backboneiobind).
 
 ## Using the Backbone.sync Replacement for Socket.io
@@ -92,7 +80,7 @@ socket.on('posts:read', function (data, callback) {
 });
 ```
 
-The callback accepts two parameters: `error` and `model`. If no error has occurred, send `null` for `error`. 
+The callback accepts two parameters: `error` and `model`. If no error has occurred, send `null` for `error`.
 
 The `model` should be a JSON representation of the client-side model's attributes.
 
@@ -103,8 +91,8 @@ for server-side socket.io events. The most likely use case for this is to broadc
 made by one client to all other clients watching a particular data object.
 
 The example app demonstrates a very basic usage scenario. If you would like to see specific code
-examples, please check out the 
-[wiki page on using the example app](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App).
+examples, please check out the
+[wiki page on using the example app](http://alogicalparadox.com/backbone.iobind/index.html#exampleapp).
 
 ### ioBind
 
@@ -143,13 +131,13 @@ socket.emit('todos:create', todo_obj);
 
 ### Usage Guidelines
 
-*Model binding without ID:* Do NOT bind to Models that do NOT have an `id` assigned. This will cause for extra listeners 
+*Model binding without ID:* Do NOT bind to Models that do NOT have an `id` assigned. This will cause for extra listeners
 and cause potentially large memory leak problems. See the example app for one possible workaround.
 
-*Namespace construction:* When constructing the namespace, as with the the ioSync method, for a given model ioBind 
+*Namespace construction:* When constructing the namespace, as with the the ioSync method, for a given model ioBind
 will default to the `url` of the collectionthat model is a part of, else it will use the models `urlRoot`.
 
-*Reserved events:* Do NOT bind to reserved backbone events, such as `change`, `remove`, and `add`. Proxy these 
+*Reserved events:* Do NOT bind to reserved backbone events, such as `change`, `remove`, and `add`. Proxy these
 events using different event tags such as `update`, `delete`, and `create`.
 
 ## Building
@@ -169,6 +157,17 @@ Install development/build dependancies (Ie: [folio](https://github.com/logicalpa
 Run jake
 
 `jake` for detailed information, `jake build:all` to build all files.
+
+#### Example Tasks Application
+
+There is an example application demonstrating the basics of using the
+`ioSync` and `ioBind` components. It is a tasks application that will keep itself syncronized across all open
+browser instances. The foundation is an [Express](https://github.com/visionmedia/express)
+server using [Seed](https://github.com/logicalparadox/seed) as an in-memory data store.
+
+The app is found in the `example` folder.
+View the [Wiki Article](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App)
+on the example app for instructions on how to get everything set up.
 
 ## Protip
 
