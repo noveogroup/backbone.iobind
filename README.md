@@ -3,7 +3,7 @@
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events.
 Also includes `backbone.iosync.js`, a drop in replacement for `Backbone.sync` that uses socket.io.
 
-Your best best for starting is to check out the [API Documentation](http://logicalparadox.com/backbone.iobind/).
+Your best best for starting is to check out the [API Documentation](http://alogicalparadox.com/backbone.iobind/).
 
 #### Quick Links
 
@@ -166,7 +166,7 @@ browser instances. The foundation is an [Express](https://github.com/visionmedia
 server using [Seed](https://github.com/logicalparadox/seed) as an in-memory data store.
 
 The app is found in the `example` folder.
-View the [Wiki Article](https://github.com/logicalparadox/backbone.iobind/wiki/Example-App)
+View the [Documentation Article](http://alogicalparadox.com/backbone.iobind/index.html#exampleapp)
 on the example app for instructions on how to get everything set up.
 
 ## Protip
