@@ -1,5 +1,5 @@
 
-0.4.0 / 2011-11-28 
+0.4.0 / 2011-11-28
 ==================
 
   * Merge branch 'feature/commonjs'
@@ -13,7 +13,7 @@
   * commonjs prefix/suffix
   * doc cleanup
 
-0.3.1 / 2011-11-14 
+0.3.1 / 2011-11-14
 ==================
 
   * Merge branch 'feature/pull-3' (thanks @dodo)
@@ -26,7 +26,7 @@
   * server side socket.io comments for example app
   * Readme tweak.
 
-0.3.0 / 2011-11-02 
+0.3.0 / 2011-11-02
 ==================
 
   * small readme changes … no runon sentences.
@@ -48,7 +48,7 @@
   * git ignore
   * starting sample express app
 
-0.2.4 / 2011-11-01 
+0.2.4 / 2011-11-01
 ==================
 
   * Merge branch 'bug/namespace'
@@ -58,7 +58,7 @@
   * readme updates for build cycle
   * renamed codex to folio in build cycle
 
-0.2.3 / 2011-10-04 
+0.2.3 / 2011-10-04
 ==================
 
   * build at v 0.2.3
@@ -66,7 +66,7 @@
   * detects if io not passed, uses window.socket or Backbone.socket instead.
   * comment updates for new docs
 
-0.2.2 / 2011-10-01 
+0.2.2 / 2011-10-01
 ==================
 
   * readme updates on how to build
@@ -76,12 +76,12 @@
   * removed makefile
   * added package.json for node compilers
 
-0.2.1 / 2011-10-01 
+0.2.1 / 2011-10-01
 ==================
 
   * Updated documentation comments
 
-0.2.0 / 2011-10-01 
+0.2.0 / 2011-10-01
 ==================
 
   * Changelog init

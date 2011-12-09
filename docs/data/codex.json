@@ -4,7 +4,7 @@
     "ghuser": "logicalparadox",
     "ghbaseurl": "/backbone.iobind",
     "ghproject": "backbone.iobind",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "hasdownloads": true,
     "description": "ioBind is a plugin for [Backbone](http://documentcloud.github.com/backbone/) that makes it easy to bind [Socket.io](http://socket.io/) events to models and collections. This can be as easy as using the included replacement for Backbone.sync, or you can bind to your own events. Or both!"
   },
