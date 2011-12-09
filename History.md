@@ -1,4 +1,22 @@
 
+0.4.1 / 2011-12-08
+==================
+
+  * [docs] 0.4.1
+  * 0.4.1 version tags in sources and dist
+  * updates to ignore files
+  * removed jakefile, added make all
+  * made compile functions make compatible
+  * changed port for example app
+  * moved outfiles to dist folder
+  * readme typos
+  * documentation for version 0.4.0
+  * rearranged README to point to new [docs]
+  * added codex for docs generation
+  * commenting for new docs
+  * added makefile for docs generation
+  * 0.4.0 link in readme
+
 0.4.0 / 2011-11-28
 ==================
 
