@@ -13,6 +13,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "codex": "0.0.x",
     "folio": "0.1.x",
     "seed": "0.0.10",
     "colors": "0.5.x",
