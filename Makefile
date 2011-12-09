@@ -1,4 +1,10 @@
 
+all:
+	@node support/compile.js
+
+serve:
+	@node example/app.js
+
 docs: clean-docs
 	@./node_modules/.bin/codex build docs \
 		--out docs/out
@@ -8,4 +14,4 @@ docs: clean-docs
 clean-docs:
 	@rm -rf docs/out
 
-.PHONY: clean-docs docs
+.PHONY: all serve clean-docs docs
