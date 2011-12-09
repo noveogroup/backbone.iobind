@@ -1,12 +1,3 @@
-
-/*!
- * backbone.iobind
- * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
- * MIT Licensed
- * https://github.com/logicalparadox/backbone.iobind
- */
-
-
 (function (undefined) {
   // Common JS // require JS
   var _, Backbone, exports;
@@ -20,27 +11,25 @@
     exports = this;
   }
 
-
 /*!
  * backbone.iobind - Backbone.sync replacement
  * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
- 
+
 
 /**
  * # Backbone.sync
- * 
+ *
  * Replaces default Backbone.sync function with socket.io transport
- * 
+ *
  * ### Assumptions
- * 
- * 
+ *
  * Currently expects active socket to be located at `window.socket`,
  * `Backbone.socket` or the sync'ed model own socket.
  * See inline comments if you want to change it.
  * ### Server Side
- * 
+ *
  *     socket.on('todos:create', function (data, fn) {
  *      ...
  *      fn(null, todo);
@@ -48,7 +37,8 @@
  *     socket.on('todos:read', ... );
  *     socket.on('todos:update', ... );
  *     socket.on('todos:delete', ... );
- * 
+ *
+ * @name sync
  */
 Backbone.sync = function (method, model, options) {
   var getUrl = function (object) {
@@ -64,8 +54,8 @@ Backbone.sync = function (method, model, options) {
   }, options);
 
   params.data = model.toJSON() || {};
-  
-  // If your socket.io connection exists on a different var, change here: 
+
+  // If your socket.io connection exists on a different var, change here:
   var io = model.socket || window.socket || Backbone.socket;
 
   io.emit(namespace + ':' + method, params.data, function (err, data) {
@@ -76,6 +66,5 @@ Backbone.sync = function (method, model, options) {
     }
   });
 };
-
 
 })();
