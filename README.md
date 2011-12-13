@@ -142,21 +142,17 @@ events using different event tags such as `update`, `delete`, and `create`.
 
 ## Building
 
-Build tool is built in [jake](https://github.com/mde/jake).
-
-`[sudo] npm install jake -g`
-
 Clone this repo:
 
-`git clone https://github.com/logicalparadox/backbone.iobind`
+`$ git clone https://github.com/logicalparadox/backbone.iobind`
 
 Install development/build dependancies (Ie: [folio](https://github.com/logicalparadox/folio)).:
 
-`npm install`
+`$ npm install`
 
-Run jake
+Run make
 
-`jake` for detailed information, `jake build:all` to build all files.
+`$ make`
 
 #### Example Tasks Application
 
@@ -168,6 +164,8 @@ server using [Seed](https://github.com/logicalparadox/seed) as an in-memory data
 The app is found in the `example` folder.
 View the [Documentation Article](http://alogicalparadox.com/backbone.iobind/index.html#exampleapp)
 on the example app for instructions on how to get everything set up.
+
+In short, run `node example/app.js` from the root directory.
 
 ## Protip
 
