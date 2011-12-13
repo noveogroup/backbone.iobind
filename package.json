@@ -15,15 +15,14 @@
   "devDependencies": {
     "codex": "0.0.x",
     "folio": "0.1.x",
-    "seed": "0.0.10",
-    "colors": "0.5.x",
+    "seed": "0.1.x",
+    "colors": "0.6.x",
     "express": "2.5.x",
     "socket.io": "0.8.x",
-    "jade": "0.16.x",
-    "stylus": "0.19.0",
-    "nib": "0.2.x",
+    "jade": "0.19.x",
+    "stylus": "0.20.0",
+    "nib": "0.3.x",
     "fez": "0.0.x",
-    "jq": "1.6.x",
     "backbone": "0.5.x",
     "underscore": "1.2.x"
   }
