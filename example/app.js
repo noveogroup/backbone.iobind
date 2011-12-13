@@ -5,11 +5,9 @@
 
 var express = require('express')
   , stylus = require('stylus')
-  , socketio = require('socket.io')
   , routes = require('./routes')
-  , folio = require('folio')
   , path = require('path')
-  , seed = require('seed');
+  , Seed = require('seed');
 
 var app = module.exports = express.createServer();
 
