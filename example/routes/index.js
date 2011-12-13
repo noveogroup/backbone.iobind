@@ -14,7 +14,7 @@ exports.index = function(req, res){
 
 /**
  * Vendor Javascript Package
- * 
+ *
  * jquery
  * underscore
  * backbone
@@ -23,11 +23,11 @@ exports.index = function(req, res){
  */
 
 var vendorJs = new folio.glossary([
-  require.resolve('jq/dist/jquery.js'),
+  path.join(__dirname, '..', 'public', 'js', 'jquery.min.js'),
   require.resolve('underscore/underscore.js'),
   require.resolve('backbone/backbone.js'),
-  path.join(__dirname, '..', '..', 'backbone.iosync.js'),
-  path.join(__dirname, '..', '..', 'backbone.iobind.js')
+  path.join(__dirname, '..', '..', 'dist', 'backbone.iosync.js'),
+  path.join(__dirname, '..', '..', 'dist', 'backbone.iobind.js')
 ]);
 
 // serve using express
@@ -35,7 +35,7 @@ exports.vendorjs = folio.serve(vendorJs);
 
 /**
  * Template Javascript Package
- * 
+ *
  * We are going to use pre-compiled
  * jade on the client-side.
  */
@@ -48,9 +48,9 @@ var templateJs = new folio.glossary([
 ], {
   compilers: {
     jade: function (name, source) {
-      return 'template[\'' + name + '\'] = ' + 
-        jade.compile(source, { 
-          client: true, 
+      return 'template[\'' + name + '\'] = ' +
+        jade.compile(source, {
+          client: true,
           compileDebug: false
         }) + ';';
     }
