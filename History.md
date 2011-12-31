@@ -1,4 +1,13 @@
 
+0.4.2 / 2011-12-31
+==================
+
+  * Sync accepts using data param, as in #fetch({ data: { id: x } }). Closes #6.
+  * [example] updated devDependencies in package.json. Closes #5
+  * [docs] updated readme with new build instructions
+  * [example] cleaned up app requires
+  * added jquery 1.7.1
+
 0.4.1 / 2011-12-08
 ==================
 

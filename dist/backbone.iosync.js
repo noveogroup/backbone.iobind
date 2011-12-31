@@ -53,7 +53,9 @@ Backbone.sync = function (method, model, options) {
     req: namespace + ':' + method
   }, options);
 
-  params.data = model.toJSON() || {};
+  if ( !params.data && model ) {
+    params.data = model.toJSON() || {};
+  }
 
   // If your socket.io connection exists on a different var, change here:
   var io = model.socket || window.socket || Backbone.socket;
