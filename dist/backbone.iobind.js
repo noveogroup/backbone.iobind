@@ -22,7 +22,7 @@
 /*!
  * Version
  */
-Backbone.Model.prototype.ioBindVersion = '0.4.2';
+Backbone.Model.prototype.ioBindVersion = '0.4.3';
 
 /**
  * # .ioBind(event, callback, [context])
@@ -152,6 +152,7 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
   return this;
 };
 
+
 /*!
  * backbone.iobind - Collection
  * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
@@ -162,7 +163,7 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
  * Version
  */
 
-Backbone.Collection.prototype.ioBindVersion = '0.4.2';
+Backbone.Collection.prototype.ioBindVersion = '0.4.3';
 
 /**
  * # ioBind
@@ -292,6 +293,7 @@ Backbone.Collection.prototype.ioUnbindAll = function (io) {
   }
   return this;
 };
+
 
 
 })();

@@ -1,4 +1,14 @@
 
+0.4.3 / 2012-01-25 
+==================
+
+  * Prefix doesn't have a problem with non-existent `module` var. Closed #8
+  * Merge branch 'bug/clean-build'
+  * clean build dist
+  * example routes use new folio#Glossary
+  * compile uses new folio objects
+  * updated deps
+
 0.4.2 / 2011-12-31
 ==================
 
