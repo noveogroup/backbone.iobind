@@ -11,6 +11,7 @@
     exports = this;
   }
 
+
 /*!
  * backbone.iobind - Backbone.sync replacement
  * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
@@ -68,5 +69,6 @@ Backbone.sync = function (method, model, options) {
     }
   });
 };
+
 
 })();

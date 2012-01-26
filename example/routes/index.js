@@ -22,7 +22,7 @@ exports.index = function(req, res){
  * backbone.iobind
  */
 
-var vendorJs = new folio.glossary([
+var vendorJs = new folio.Glossary([
   path.join(__dirname, '..', 'public', 'js', 'jquery.min.js'),
   require.resolve('underscore/underscore.js'),
   require.resolve('backbone/backbone.js'),
@@ -40,7 +40,7 @@ exports.vendorjs = folio.serve(vendorJs);
  * jade on the client-side.
  */
 
-var templateJs = new folio.glossary([
+var templateJs = new folio.Glossary([
   require.resolve('jade/runtime.js'),
   path.join(__dirname, '..', 'views/templates/js/header.js'),
   path.join(__dirname, '..', 'views/templates/form.jade'),

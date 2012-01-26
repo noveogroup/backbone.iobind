@@ -3,6 +3,8 @@ var path = require('path'),
     color = require('colors'),
     folio = require('folio');
 
+var Glossary = folio.Glossary;
+
 var about = [
   '',
   '  |_  _. _ | |_  _ ._  _ '.blue +'   o _ |_ o._  _|'.green + '  Backbone.ioBind'.grey,
@@ -12,7 +14,7 @@ var about = [
 
 console.log(about);
 
-var iobind = new folio.glossary([
+var iobind = new Glossary([
   path.join(__dirname, '..', 'lib', 'model.js'),
   path.join(__dirname, '..', 'lib', 'collection.js')
 ], {
@@ -26,7 +28,7 @@ iobind.compile(function (err, source) {
 });
 
 
-var iobindmin = new folio.glossary([
+var iobindmin = new Glossary([
   path.join(__dirname, '..', 'lib', 'model.js'),
   path.join(__dirname, '..', 'lib', 'collection.js')
 ], {
@@ -41,7 +43,7 @@ iobindmin.compile(function (err, source) {
   console.log('Build successful: '.green + '\tdist/backbone.iobind.min.js'.blue);
 });
 
-var iosync = new folio.glossary([
+var iosync = new Glossary([
   path.join(__dirname, '..', 'lib', 'sync.js')
 ], {
   prefix: fs.readFileSync(path.join(__dirname, '..', 'lib', 'prefix.js'), 'utf8'),
@@ -53,7 +55,7 @@ iosync.compile(function (err, source) {
   console.log('Build successful: '.green + '\tdist/backbone.iosync.js'.blue);
 });
 
-var iosyncmin = new folio.glossary([
+var iosyncmin = new Glossary([
   path.join(__dirname, '..', 'lib', 'sync.js')
 ], {
   minify: true,
