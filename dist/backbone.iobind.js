@@ -11,6 +11,7 @@
     exports = this;
   }
 
+
 /*!
  * backbone.iobind - Model
  * Copyright(c) 2011 Jake Luer <jake@alogicalparadox.com>
@@ -149,19 +150,6 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
   }
   return this;
 };
-
-})();(function (undefined) {
-  // Common JS // require JS
-  var _, Backbone, exports;
-  if (typeof window === 'undefined' || typeof require === 'function') {
-    _ = require('underscore');
-    Backbone = require('backbone');
-    exports = module.exports = Backbone;
-  } else {
-    _ = this._;
-    Backbone = this.Backbone;
-    exports = this;
-  }
 
 /*!
  * backbone.iobind - Collection
@@ -303,5 +291,6 @@ Backbone.Collection.prototype.ioUnbindAll = function (io) {
   }
   return this;
 };
+
 
 })();
