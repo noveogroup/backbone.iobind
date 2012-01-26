@@ -4,7 +4,8 @@
   if (typeof window === 'undefined' || typeof require === 'function') {
     _ = require('underscore');
     Backbone = require('backbone');
-    exports = module.exports = Backbone;
+    exports = Backbone;
+    if (module) module.exports = exports;
   } else {
     _ = this._;
     Backbone = this.Backbone;
