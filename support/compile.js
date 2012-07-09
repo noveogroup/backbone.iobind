@@ -3,6 +3,8 @@ var path = require('path'),
     color = require('colors'),
     folio = require('folio');
 
+var version = require('../package.json').version;
+
 var Glossary = folio.Glossary;
 
 var about = [
@@ -23,6 +25,7 @@ var iobind = new Glossary([
 });
 
 iobind.compile(function (err, source) {
+  source = source.replace(/@VERSION/g, version);
   fs.writeFileSync(path.join(__dirname, '..', 'dist', 'backbone.iobind.js'), source);
   console.log('Build successful: '.green + '\tdist/backbone.iobind.js'.blue);
 });
@@ -38,6 +41,7 @@ var iobindmin = new Glossary([
 });
 
 iobindmin.compile(function (err, source) {
+  source = source.replace(/@VERSION/g, version);
   var copyright = fs.readFileSync(path.join(__dirname, '..', 'lib', 'copyright.js'));
   fs.writeFileSync(path.join(__dirname, '..', 'dist', 'backbone.iobind.min.js'), copyright + '\n' + source);
   console.log('Build successful: '.green + '\tdist/backbone.iobind.min.js'.blue);
