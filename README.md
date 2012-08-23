@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/logicalparadox/backbone.iobind.png)](http://travis-ci.org/logicalparadox/backbone.iobind)
 # Backbone.ioBind
 
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events.
