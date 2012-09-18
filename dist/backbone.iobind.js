@@ -22,7 +22,7 @@
 /*!
  * Version
  */
-Backbone.Model.prototype.ioBindVersion = '0.4.3';
+Backbone.Model.prototype.ioBindVersion = '0.4.4';
 
 /**
  * # .ioBind(event, callback, [context])
@@ -71,8 +71,10 @@ Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
     name: eventName,
     global: globalName,
     cbLocal: callback,
-    cbGlobal: function (data) {
-      self.trigger(eventName, data);
+    cbGlobal: function () {
+      var args = [eventName];
+      args.push.apply(args, arguments);
+      self.trigger.apply(self, args);
     }
   };
   this.bind(event.name, event.cbLocal, (context || self));
@@ -163,7 +165,7 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
  * Version
  */
 
-Backbone.Collection.prototype.ioBindVersion = '0.4.3';
+Backbone.Collection.prototype.ioBindVersion = '0.4.4';
 
 /**
  * # ioBind
@@ -213,8 +215,10 @@ Backbone.Collection.prototype.ioBind = function (eventName, io, callback, contex
     name: eventName,
     global: globalName,
     cbLocal: callback,
-    cbGlobal: function (data) {
-      self.trigger(eventName, data);
+    cbGlobal: function () {
+      var args = [eventName];
+      args.push.apply(args, arguments);
+      self.trigger.apply(self, args);
     }
   };
   this.bind(event.name, event.cbLocal, context);
