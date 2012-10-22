@@ -167,6 +167,10 @@ on the example app for instructions on how to get everything set up.
 
 In short, run `node example/app.js` from the root directory.
 
+## Other Frameworks
+
+- [Backbone.realtimeBind](https://github.com/andreisebastianc/Backbone.js-Cometd-RealtimeBind) - ioBind for CometD by [@andreisebastianc](https://github.com/andreisebastianc/).
+
 ## Protip
 
 Works great with the awesome [backbone.modelbinding](https://github.com/derickbailey/backbone.modelbinding).
