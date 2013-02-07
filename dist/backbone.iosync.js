@@ -1,12 +1,14 @@
 (function (undefined) {
   // Common JS // require JS
-  var _, Backbone, exports;
+  var _, $, Backbone, exports;
   if (typeof window === 'undefined' || typeof require === 'function') {
+    $ = require('jquery');
     _ = require('underscore');
     Backbone = require('backbone');
     exports = Backbone;
     if (module) module.exports = exports;
   } else {
+    $ = this.$;
     _ = this._;
     Backbone = this.Backbone;
     exports = this;
@@ -46,11 +48,14 @@ Backbone.sync = function (method, model, options) {
   var getUrl = function (object) {
 
     if (options && options.url) {
-      return _.isFunction(options.url) ? options.url() : options.url;
+      return _.result(options, 'url') || urlError();
     }
     
-    if (!(object && object.url)) return null;
-    return _.isFunction(object.url) ? object.url() : object.url;
+    if (object && object.url){
+      return _.result(object, 'url') || urlError();
+    }
+
+    urlError();
   };
 
   var cmd = getUrl(model).split('/')
@@ -61,19 +66,37 @@ Backbone.sync = function (method, model, options) {
   }, options);
 
   if ( !params.data && model ) {
-    params.data = model.toJSON() || {};
+    params.data = model.toJSON(options) || {};
   }
 
   // If your socket.io connection exists on a different var, change here:
   var io = model.socket || window.socket || Backbone.socket;
 
+  var success = options.success;
+  options.success = function(resp) {
+    if (success) success(model, resp, options);
+    model.trigger('sync', model, resp, options);
+  };
+
+  var error = options.error;
+  options.error = function(err) {
+    if (error) error(model, err, options);
+    model.trigger('error', model, err, options);
+  };
+
+  var defer = $.Deferred();
   io.emit(namespace + ':' + method, params.data, function (err, data) {
     if (err) {
       options.error(err);
+      defer.reject();
     } else {
       options.success(data);
+      defer.resolve();
     }
   });
+  promise = defer.promise();
+  model.trigger('request', model, promise, options);
+  return promise;
 };
 
 

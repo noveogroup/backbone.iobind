@@ -133,8 +133,10 @@ _gaq.push(['_trackPageview']);
     name: eventName,
     global: globalName,
     cbLocal: callback,
-    cbGlobal: function (data) {
-      self.trigger(eventName, data);
+    cbGlobal: function () {
+      var args = [eventName];
+      args.push.apply(args, arguments);
+      self.trigger.apply(self, args);
     }
   };
   this.bind(event.name, event.cbLocal, (context || self));
