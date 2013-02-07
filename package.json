@@ -18,12 +18,12 @@
     "seed": "0.1.x",
     "colors": "0.6.x",
     "express": "2.5.x",
-    "socket.io": "0.8.x",
+    "socket.io": "0.9.x",
     "jade": "0.20.x",
     "stylus": "0.22.x",
     "nib": "0.3.x",
     "fez": "0.0.x",
-    "backbone": "0.5.x",
-    "underscore": "1.2.x"
+    "backbone": "0.9.10",
+    "underscore": "1.4.x"
   }
 }
