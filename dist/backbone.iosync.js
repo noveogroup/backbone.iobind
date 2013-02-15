@@ -65,7 +65,7 @@ Backbone.sync = function (method, model, options) {
     req: namespace + ':' + method
   }, options);
 
-  if ( !params.data && model ) {
+  if ( !params.data && model && (method === 'create' || method === 'update' || method === 'patch')) {
     params.data = model.toJSON(options) || {};
   }
 
