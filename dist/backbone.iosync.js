@@ -6,7 +6,7 @@
     _ = require('underscore');
     Backbone = require('backbone');
     exports = Backbone;
-    if (module) module.exports = exports;
+    if (typeof module !== 'undefined') module.exports = exports;
   } else {
     $ = this.$;
     _ = this._;
