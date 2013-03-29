@@ -13,8 +13,8 @@ Your best best for starting is to check out the [API Documentation](http://alogi
 
 #### Dependancies
 
-* [Socket.io](http://socket.io/) 0.7.x || 0.8.x
-* [Backbone](http://documentcloud.github.com/backbone/) 0.5.x
+* [Socket.io](http://socket.io/) 0.7.x || 0.8.x || 0.9.x
+* [Backbone](http://documentcloud.github.com/backbone/) 1.0.0
 
 ### Usage
 

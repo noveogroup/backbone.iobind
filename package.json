@@ -23,7 +23,7 @@
     "stylus": "0.22.x",
     "nib": "0.3.x",
     "fez": "0.0.x",
-    "backbone": "0.9.10",
+    "backbone": "1.0.0",
     "underscore": "1.4.x"
   }
 }
