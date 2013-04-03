@@ -118,7 +118,7 @@ socket.on('todos:delete', ... );
     params.data = params.attrs || model.toJSON(options) || {};
   }
 
-  if (params.patch === true &amp;&amp; params.data.id == null &amp;&amp; model){
+  if (params.patch === true &amp;&amp; params.data.id == null &amp;&amp; model) {
     params.data.id = model.id;
   }
 

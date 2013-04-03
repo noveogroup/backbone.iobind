@@ -60,7 +60,7 @@ Backbone.sync = function (method, model, options) {
     params.data = params.attrs || model.toJSON(options) || {};
   }
 
-  if (params.patch === true && params.data.id == null && model){
+  if (params.patch === true && params.data.id == null && model) {
     params.data.id = model.id;
   }
 
