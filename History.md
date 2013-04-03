@@ -1,3 +1,9 @@
+0.4.6 / 2013-04-03 
+==================
+
+  * Compatibility with Backbone 1.0.0
+  * Tests for Backbone.sync
+  * Support model.save(attrs, {patch: true})
 
 0.4.3 / 2012-01-25 
 ==================
