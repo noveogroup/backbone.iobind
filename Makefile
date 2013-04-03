@@ -14,4 +14,8 @@ docs: clean-docs
 clean-docs:
 	@rm -rf docs/out
 
+test: all
+	@./node_modules/.bin/mocha \
+		--reporter spec
+
 .PHONY: all serve clean-docs docs

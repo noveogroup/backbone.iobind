@@ -24,6 +24,8 @@
     "nib": "0.3.x",
     "fez": "0.0.x",
     "backbone": "1.0.0",
-    "underscore": "1.4.x"
+    "underscore": "1.4.x",
+    "jquery": "*",
+    "mocha": "1.8.2"
   }
 }
