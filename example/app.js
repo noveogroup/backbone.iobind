@@ -125,36 +125,37 @@ io.sockets.on('connection', function (socket) {
   });
 
   /**
-   * todos:update
+   * todo:update
    *
    * called when we .save() our model
    * after toggling its completed status
    */
 
-  socket.on('todos:update', function (data, callback) {
+  socket.on('todo:update', function (data, callback) {
     var todo = db.get('/todo/' + data.id);
     todo.set(data);
 
     var json = todo._attributes;
 
-    socket.emit('todos/' + data.id + ':update', json);
-    socket.broadcast.emit('todos/' + data.id + ':update', json);
+    socket.emit('todo/' + data.id + ':update', json);
+    socket.broadcast.emit('todo/' + data.id + ':update', json);
     callback(null, json);
   });
 
   /**
-   * todos:delete
+   * todo:delete
    *
    * called when we .destroy() our model
    */
 
-  socket.on('todos:delete', function (data, callback) {
+  socket.on('todo:delete', function (data, callback) {
+    console.log(db.get('/todo/' + data.id))
     var json = db.get('/todo/' + data.id)._attributes;
 
     db.del('/todo/' + data.id);
 
-    socket.emit('todos/' + data.id + ':delete', json);
-    socket.broadcast.emit('todos/' + data.id + ':delete', json);
+    socket.emit('todo/' + data.id + ':delete', json);
+    socket.broadcast.emit('todo/' + data.id + ':delete', json);
     callback(null, json);
   });
 

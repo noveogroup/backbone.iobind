@@ -140,7 +140,7 @@ Minimal.Todos = Backbone.Collection.extend({
 Minimal.TodoList = Backbone.View.extend({
   id: 'TodoList',
   initialize: function(todos) {
-    _.bindAll(this, 'render', 'addTodo', 'removeTodo');
+    _.bindAll(this, 'render', 'addTodo');
     
     this.todos = todos;
     
@@ -149,9 +149,6 @@ Minimal.TodoList = Backbone.View.extend({
     
     // this is called when the collection adds a new todo from the server
     this.todos.bind('add', this.addTodo);
-    
-    // this is called when the collection is told to remove a todo
-    this.todos.bind('remove', this.removeTodo);
     
     this.render();
   },
@@ -167,23 +164,6 @@ Minimal.TodoList = Backbone.View.extend({
   addTodo: function (todo) {
     var tdv = new Minimal.TodoListItem(todo);
     $(this.el).append(tdv.el);
-  },
-  removeTodo: function (todo) {
-    var self = this
-      , width = this.$('#' + todo.id).outerWidth();
-    
-    // ooh, shiny animation!
-    this.$('#' + todo.id).css('width', width + 'px');
-    this.$('#' + todo.id).animate({
-      'margin-left': width,
-      'opacity': 0
-    }, 200, function () {
-        self.$('#' + todo.id).animate({
-          'height': 0
-        }, 200, function () {
-            self.$('#' + todo.id).remove();
-          });
-      });
   }
 });
 
@@ -205,9 +185,11 @@ Minimal.TodoListItem = Backbone.View.extend({
     'click .delete': 'deleteTodo'
   },
   initialize: function (model) {
-    _.bindAll(this, 'setStatus', 'completeTodo', 'deleteTodo');
+    _.bindAll(this, 'setStatus', 'completeTodo', 'deleteTodo', 'removeTodo');
     this.model = model;
     this.model.bind('change:completed', this.setStatus);
+    // this is called when the model is told to remove a todo
+    this.model.bind('remove', this.removeTodo);
     this.render();
   },
   render: function () {
@@ -235,6 +217,23 @@ Minimal.TodoListItem = Backbone.View.extend({
     // Silent is true so that we react to the server
     // broadcasting the remove event.
     this.model.destroy({ silent: true });
+  },
+  removeTodo: function (todo) {
+    var self = this
+      , width = this.$el.outerWidth();
+    
+    // ooh, shiny animation!
+    this.$el.css('width', width + 'px');
+    this.$el.animate({
+      'margin-left': width,
+      'opacity': 0
+    }, 200, function () {
+        self.$el.animate({
+          'height': 0
+        }, 200, function () {
+            self.$el.remove();
+          });
+      });
   }
 });
 
