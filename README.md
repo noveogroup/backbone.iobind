@@ -139,7 +139,7 @@ socket.emit('todos:create', todo_obj);
 and cause potentially large memory leak problems. See the example app for one possible workaround.
 
 *Namespace construction:* When constructing the namespace, as with the the ioSync method, for a given model ioBind
-will default to the `url` of the collectionthat model is a part of, else it will use the models `urlRoot`.
+will default to the `url` of the collection that model is a part of, else it will use the models `urlRoot`.
 
 *Reserved events:* Do NOT bind to reserved backbone events, such as `change`, `remove`, and `add`. Proxy these
 events using different event tags such as `update`, `delete`, and `create`.
