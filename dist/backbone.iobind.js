@@ -62,7 +62,7 @@ Backbone.Model.prototype.ioBindVersion = '0.4.6';
 
 Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
   var ioEvents = this._ioEvents || (this._ioEvents = {})
-    , globalName = this.url() + ':' + eventName
+    , globalName = _.result(this, 'url') + ':' + eventName
     , self = this;
   if ('function' == typeof io) {
     context = callback;
@@ -207,7 +207,7 @@ Backbone.Collection.prototype.ioBindVersion = '0.4.6';
 
 Backbone.Collection.prototype.ioBind = function (eventName, io, callback, context) {
   var ioEvents = this._ioEvents || (this._ioEvents = {})
-    , globalName = this.url + ':' + eventName
+    , globalName = _.result(this, 'url') + ':' + eventName
     , self = this;
   if ('function' == typeof io) {
     context = callback;

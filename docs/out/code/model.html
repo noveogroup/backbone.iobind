@@ -122,7 +122,7 @@ _gaq.push(['_trackPageview']);
           <div class="code-wrap">
             <pre class="source prettyprint"><code>Backbone.Model.prototype.ioBind = function (eventName, io, callback, context) {
   var ioEvents = this._ioEvents || (this._ioEvents = {})
-    , globalName = this.url() + ':' + eventName
+    , globalName = _.result(this, 'url') + ':' + eventName
     , self = this;
   if ('function' == typeof io) {
     context = callback;
@@ -193,6 +193,7 @@ _gaq.push(['_trackPageview']);
     } else {
       this.unbind(eventName);
       io.removeAllListeners(globalName);
+      delete io.$events[globalName];
     }
     if (events.length === 0) {
       delete ioEvents[eventName];
