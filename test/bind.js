@@ -56,6 +56,36 @@ describe('Backbone.iobind', function() {
         }
 
         return _this;
+      },
+      removeListener: function (name, fn) {
+        var _this = Backbone.socket;
+        if (_this.$events && _this.$events[name]) {
+          var list = _this.$events[name];
+          if (_.isArray(list)) {
+            var pos = -1;
+
+            for (var i=0, l = list.length; i<l; i++) {
+              if (list[i] === fn || (list[i].listener && list[i].listener === fn)) {
+                pos = i;
+                break;
+              }
+            }
+
+            if (pos < 0) {
+              return _this;
+            }
+
+            list.splice(pos, 1);
+
+            if (!list.length) {
+              delete this.$events[name];
+            }
+          } else if (list === fn || (list.listener && list.listener === fn)) {
+            delete _this.$events[name];
+          }
+        }
+         
+        return _this;
       }
     };
     sio = Backbone.socket;
@@ -68,9 +98,12 @@ describe('Backbone.iobind', function() {
   })
 
   it("ioUnbind", function() {
+
+    library.create(attrs, {wait: false});
+    library.ioBind('create', Backbone.socket, library.serverCreate, library);
     library.ioUnbind('create', sio, library.serverCreate);
-    console.log(Backbone.socket.$events);
-    assert(!Backbone.socket.$events);
+    var isEmpty = _.isEmpty(Backbone.socket.$events);
+    assert.equal(isEmpty, true);
   })
 
   it("ioUnbindAll", function() {
@@ -78,7 +111,8 @@ describe('Backbone.iobind', function() {
     library.ioBind('update', Backbone.socket, library.serverUpdate, library);
     library.ioBind('delete', Backbone.socket, library.serverDelete, library);
     library.ioUnbindAll(Backbone.socket);
-    assert(!Backbone.socket.$events);
+    var isEmpty = _.isEmpty(Backbone.socket.$events);
+    assert.equal(isEmpty, true);
   });
 
 
