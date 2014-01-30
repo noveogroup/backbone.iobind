@@ -24,7 +24,7 @@
 /*!
  * Version
  */
-Backbone.Model.prototype.ioBindVersion = '0.4.6';
+Backbone.Model.prototype.ioBindVersion = '0.4.7';
 
 /**
  * # .ioBind(event, callback, [context])
@@ -168,7 +168,7 @@ Backbone.Model.prototype.ioUnbindAll = function (io) {
  * Version
  */
 
-Backbone.Collection.prototype.ioBindVersion = '0.4.6';
+Backbone.Collection.prototype.ioBindVersion = '0.4.7';
 
 /**
  * # ioBind
