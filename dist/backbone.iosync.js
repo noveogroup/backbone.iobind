@@ -1,7 +1,7 @@
 (function (undefined) {
   // Common JS // require JS
   var _, $, Backbone, exports;
-  if (typeof window === 'undefined' || typeof require === 'function') {
+  if ((typeof window === 'undefined' || window.window !== window) && typeof require === 'function') {
     $ = require('jquery');
     _ = require('underscore');
     Backbone = require('backbone');
