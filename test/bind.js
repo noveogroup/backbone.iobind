@@ -84,7 +84,7 @@ describe('Backbone.iobind', function() {
             delete _this.$events[name];
           }
         }
-         
+
         return _this;
       }
     };
