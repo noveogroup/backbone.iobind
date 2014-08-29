@@ -61,8 +61,7 @@ Backbone.sync = function (method, model, options) {
   }
 
   var cmd = params.url.split('/')
-    , namespace = (cmd[0] !== '') ? cmd[0] : cmd[1]; // if leading slash, ignore
-
+    
   if ( !params.data && model ) {
     params.data = params.attrs || model.toJSON(options) || {};
   }
@@ -77,7 +76,7 @@ Backbone.sync = function (method, model, options) {
   //since Backbone version 1.0.0 all events are raised in methods 'fetch', 'save', 'remove' etc
 
   var defer = $.Deferred();
-  io.emit(namespace + ':' + method, params.data, function (err, data) {
+  io.emit(params.url + ':' + method, params.data, function (err, data) {
     if (err) {
       if(options.error) options.error(err);
       defer.reject();
