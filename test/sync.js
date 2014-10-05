@@ -95,7 +95,7 @@ describe('Backbone.sync', function(){
     Backbone.sync('test_method', model);
     assert.equal(Backbone.socket.path, 'test:test_method');
   });
-
+  
   it("patch", function() {
     library.create({id: 'patch-id', title  : "The Tempest", author : "Bill Shakespeare"}, {wait: false});
     library.first().save({author: 'Tim Shakespeare'}, {patch: true});
@@ -106,4 +106,19 @@ describe('Backbone.sync', function(){
     assert.equal(Backbone.socket.data.title, null);
   });
 
+  it("custom_channel", function() {
+	var model = new Backbone.Model();
+	model.channel = 'a';
+	model.fetch({url: '/one/two'});
+	assert.equal(Backbone.socket.path, 'a:read');
+  });
+  
+  it("custom_channel_method", function() {
+	var model = new Backbone.Model();
+	model.channel = function(params) { return params.url; };
+	model.fetch({url: '/one/two'});
+	assert.equal(Backbone.socket.path, '/one/two:read');
+  });
+  
+  
 })
