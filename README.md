@@ -56,10 +56,11 @@ namespace tag for that model.
 
 *For Example:* If your collection url is 'posts' or '/posts', the events to listen for server-side will be:
 
-* `posts:create`
-* `posts:read`
-* `posts:update`
-* `posts:delete`
+* `posts:read`:			read collection of posts
+* `posts:create`:		create post
+* `posts/id:read`:		read post for the input id
+* `posts/id:update`:	update post for the input id
+* `posts/id:delete`:	delete post for the input id
 
 As with the default sync method, for a given model, ioSync will default to the `url` of the collection
 that model is a part of, else it will use the models `urlRoot`.
