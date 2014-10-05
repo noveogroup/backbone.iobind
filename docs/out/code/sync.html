@@ -76,7 +76,7 @@ _gaq.push(['_trackPageview']);
           <div class="header"><h1>Backbone.sync</h1>
           </div>
           <div class="ctx">
-            <h3>Backbone.sync()
+            <h3>socketSync()
             </h3>
           </div>
           <div class="tags">
@@ -102,7 +102,7 @@ socket.on('todos:delete', ... );
           <div class="view-source">View Source
           </div>
           <div class="code-wrap">
-            <pre class="source prettyprint"><code>Backbone.sync = function (method, model, options) {
+            <pre class="source prettyprint"><code>var socketSync = function (method, model, options) {
   var params = _.extend({}, options)
 
   if (params.url) {
@@ -140,6 +140,20 @@ socket.on('todos:delete', ... );
   var promise = defer.promise();
   model.trigger('request', model, promise, options);
   return promise;
+};
+
+var getSyncMethod = function(model) {
+  if (_.result(model.ajaxSync)) {
+    return ajaxSync;
+  }
+
+  return socketSync;
+};
+
+// Override 'Backbone.sync' to default to socketSync,
+// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
+Backbone.sync = function(method, model, options) {
+  return getSyncMethod(model).apply(this, [method, model, options]);
 };
 
 // Throw an error when a URL is needed, and none is supplied.

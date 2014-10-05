@@ -28,6 +28,7 @@
  * MIT Licensed
  */
 
+var ajaxSync = Backbone.sync;
 
 /**
  * # Backbone.sync
@@ -51,7 +52,7 @@
  *
  * @name sync
  */
-Backbone.sync = function (method, model, options) {
+var socketSync = function (method, model, options) {
   var params = _.extend({}, options)
 
   if (params.url) {
@@ -91,11 +92,26 @@ Backbone.sync = function (method, model, options) {
   return promise;
 };
 
+var getSyncMethod = function(model) {
+  if (_.result(model.ajaxSync)) {
+    return ajaxSync;
+  }
+
+  return socketSync;
+};
+
+// Override 'Backbone.sync' to default to socketSync,
+// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
+Backbone.sync = function(method, model, options) {
+  return getSyncMethod(model).apply(this, [method, model, options]);
+};
+
 // Throw an error when a URL is needed, and none is supplied.
 // Copy from backbone.js#1558
 var urlError = function() {
   throw new Error('A "url" property or function must be specified');
 };
+
 
   return Backbone;
 }));

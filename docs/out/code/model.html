@@ -193,7 +193,10 @@ _gaq.push(['_trackPageview']);
     } else {
       this.unbind(eventName);
       io.removeAllListeners(globalName);
-      delete io.$events[globalName];
+      // for compatibility with socket.io version &gt;= 1.0
+      if (io.$events) {
+        delete io.$events[globalName];
+      }
     }
     if (events.length === 0) {
       delete ioEvents[eventName];

@@ -133,7 +133,10 @@ Backbone.Model.prototype.ioUnbind = function (eventName, io, callback) {
     } else {
       this.unbind(eventName);
       io.removeAllListeners(globalName);
-      delete io.$events[globalName];
+      // for compatibility with socket.io version >= 1.0
+      if (io.$events) {
+        delete io.$events[globalName];
+      }
     }
     if (events.length === 0) {
       delete ioEvents[eventName];
@@ -278,7 +281,10 @@ Backbone.Collection.prototype.ioUnbind = function (eventName, io, callback) {
     } else {
       this.unbind(eventName);
       io.removeAllListeners(globalName);
-      delete io.$events[globalName];
+      // for compatibility with socket.io version >= 1.0
+      if (io.$events) {
+        delete io.$events[globalName];
+      }
     }
     if (events.length === 0) {
       delete ioEvents[eventName];
