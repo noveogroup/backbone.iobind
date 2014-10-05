@@ -23,7 +23,8 @@ exports.index = function(req, res){
  */
 
 var vendorJs = new folio.Glossary([
-  path.join(__dirname, '..', 'public', 'js', 'jquery.min.js'),
+  //path.join(__dirname, '..', 'public', 'js', 'jquery.min.js'),
+  require.resolve('jquery/dist/jquery.js'),
   require.resolve('underscore/underscore.js'),
   require.resolve('backbone/backbone.js'),
   path.join(__dirname, '..', '..', 'dist', 'backbone.iosync.js'),
@@ -49,7 +50,7 @@ var templateJs = new folio.Glossary([
   compilers: {
     jade: function (name, source) {
       return 'template[\'' + name + '\'] = ' +
-        jade.compile(source, {
+        jade.compileClient(source, {
           client: true,
           compileDebug: false
         }) + ';';

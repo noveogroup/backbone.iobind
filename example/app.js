@@ -4,12 +4,15 @@
  */
 
 var express = require('express')
+  , bodyParser = require('body-parser')
+  , errorHandler = require('errorhandler')
   , stylus = require('stylus')
   , routes = require('./routes')
   , path = require('path')
   , Seed = require('seed');
 
-var app = module.exports = express.createServer();
+var app = module.exports = express();
+var server = require('http').createServer(app);
 
 // Configuration
 
@@ -17,32 +20,30 @@ var stylus_compile = function (str, path) {
   return stylus(str)
           .set('filename', path)
           .set('compress', true)
-          .include(require('nib').path)
-          .include(require('fez').path);
+          .use(require('nib')())
+          .use(require('fez')());
 };
 
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(stylus.middleware({
-    src: path.join(__dirname, 'styles'),
-    dest: path.join(__dirname, 'public'),
-    compile: stylus_compile,
-    force: true // this forces the css to be regenerated on every pageview
-  }));
-  app.use(express.static(__dirname + '/public'));
-});
 
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+//app.use(bodyParser());
+app.use(stylus.middleware({
+  src: path.join(__dirname, 'styles'),
+  dest: path.join(__dirname, 'public'),
+  compile: stylus_compile,
+  force: true // this forces the css to be regenerated on every pageview
+}));
+app.use(express.static(__dirname + '/public'));
 
-app.configure('production', function(){
-  app.use(express.errorHandler());
-});
+
+if (app.get('env') === 'development') {
+  app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+}
+
+if (app.get('env') === 'production') {
+  app.use(errorHandler());
+}
 
 // Our psuedo database, on Seed.
 // https://github.com/logicalparadox/seed
@@ -67,7 +68,7 @@ var db = new Minimal.Todos()
 
 // Socket.io
 
-var io = require('socket.io').listen(app);
+var io = require('socket.io')(server);
 
 /**
  * our socket transport events
@@ -168,6 +169,6 @@ app.get('/js/templates.js', routes.templatejs);
 app.get('/js/vendor.js', routes.vendorjs);
 
 if (!module.parent) {
-  app.listen(1228);
-  console.log("Backbone.ioBind Example App listening on port %d in %s mode", app.address().port, app.settings.env);
+  server.listen(1228);
+  console.log("Backbone.ioBind Example App listening on port %d in %s mode", server.address().port, app.get('env'));
 }
