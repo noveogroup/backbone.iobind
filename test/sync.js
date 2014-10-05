@@ -99,7 +99,7 @@ describe('Backbone.sync', function(){
   it("patch", function() {
     library.create({id: 'patch-id', title  : "The Tempest", author : "Bill Shakespeare"}, {wait: false});
     library.first().save({author: 'Tim Shakespeare'}, {patch: true});
-    
+
     assert.equal(Backbone.socket.path, 'library:patch');
     assert.equal(Backbone.socket.data.id, 'patch-id');
     assert.equal(Backbone.socket.data.author, 'Tim Shakespeare');
