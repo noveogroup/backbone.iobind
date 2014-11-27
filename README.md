@@ -11,7 +11,7 @@ Your best bet for starting is to check out the [API Documentation](http://alogic
 * [Google Group](https://groups.google.com/group/backboneiobind)
 * [Changelog](https://github.com/logicalparadox/backbone.iobind/blob/master/History.md)
 
-#### Dependancies
+#### Dependencies
 
 * [Socket.io](http://socket.io/) 0.7.x || 0.8.x || 0.9.x || 1.x
 * [Backbone](http://documentcloud.github.com/backbone/) 1.x
