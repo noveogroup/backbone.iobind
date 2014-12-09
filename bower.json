@@ -1,0 +1,42 @@
+{
+  "name": "backbone-iobind",
+  "description": "Bind socket.io events to backbone models & collections. Also includes a drop-in replacement for Backbone.sync using socket.io.",
+  "homepage": "https://github.com/noveogroup/backbone.iobind",
+  "keywords": [
+    "model",
+    "view",
+    "controller",
+    "router",
+    "server",
+    "client",
+    "browser",
+    "socketio",
+    "socket",
+    "iobind"
+  ],
+  "author": "Noveo Group",
+  "repository": {
+    "type": "git",
+    "url": "git://https://github.com/noveogroup/backbone.iobind.git"
+  },
+  "dependencies": {
+    "backbone": "~1.x"
+  },
+  "version": "0.4.8",
+  "main": [
+    "dist/backbone.iobind.js",
+    "dist/backbone.iosync.js"
+  ],
+  "authors": [
+    "Jake Luer <jake@alogicalparadox.com>",
+    "Noveo Group <jobs@noveogroup.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
