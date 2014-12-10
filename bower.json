@@ -22,7 +22,7 @@
   "dependencies": {
     "backbone": "~1.x"
   },
-  "version": "0.4.8",
+  "version": "0.4.9",
   "main": [
     "dist/backbone.iobind.js",
     "dist/backbone.iosync.js"
