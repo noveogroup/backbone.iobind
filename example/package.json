@@ -7,6 +7,7 @@
     "errorhandler": "^1.2.0",
     "express": "4.9.x",
     "fez": "0.0.x",
+    "folio": "^0.2.x",
     "jade": "1.7.x",
     "jquery": "1.11.x",
     "nib": "1.0.x",
