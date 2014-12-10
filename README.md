@@ -3,11 +3,11 @@
 Backbone.ioBind allows you to bind socket.io events to backbone model & collection events.
 Also includes `backbone.iosync.js`, a drop in replacement for `Backbone.sync` that uses socket.io.
 
-Your best bet for starting is to check out the [API Documentation](http://alogicalparadox.com/backbone.iobind/).
+Your best bet for starting is to check out the [API Documentation](https://noveogroup.github.io/backbone.iobind/).
 
 #### Quick Links
 
-* [Example App Installation](http://alogicalparadox.com/backbone.iobind/index.html#exampleapp)
+* [Example App Installation](https://noveogroup.github.io/backbone.iobind/index.html#exampleapp)
 * [Google Group](https://groups.google.com/group/backboneiobind)
 * [Changelog](https://github.com/logicalparadox/backbone.iobind/blob/master/History.md)
 
@@ -96,7 +96,7 @@ made by one client to all other clients watching a particular data object.
 
 The example app demonstrates a very basic usage scenario. If you would like to see specific code
 examples, please check out the
-[wiki page on using the example app](http://alogicalparadox.com/backbone.iobind/index.html#exampleapp).
+[wiki page on using the example app](https://noveogroup.github.io/backbone.iobind/index.html#exampleapp).
 
 ### ioBind
 
@@ -166,7 +166,7 @@ browser instances. The foundation is an [Express](https://github.com/visionmedia
 server using [Seed](https://github.com/logicalparadox/seed) as an in-memory data store.
 
 The app is found in the `example` folder.
-View the [Documentation Article](http://alogicalparadox.com/backbone.iobind/index.html#exampleapp)
+View the [Documentation Article](https://noveogroup.github.io/backbone.iobind/index.html#exampleapp)
 on the example app for instructions on how to get everything set up.
 
 In short, run `node example/app.js` from the root directory.
@@ -181,7 +181,7 @@ Works great with the awesome [backbone.modelbinding](https://github.com/derickba
 
 ## Contributors
 
-Interested in contributing? Fork to get started. Contact [@logicalparadox](http://github.com/logicalparadox) if you are interested in being regular contributor.
+Interested in contributing? Fork to get started. Contact [@mahnunchik](http://github.com/mahnunchik) if you are interested in being regular contributor.
 
 * Jake Luer [[Github: @logicalparadox](http://github.com/logicalparadox)] [[Twitter: @jakeluer](http://twitter.com/jakeluer)] [[Website](http://alogicalparadox.com)]
 
