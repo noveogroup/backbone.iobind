@@ -91,7 +91,6 @@ var socketSync = function (method, model, options) {
       // Add "abort" function to the promise, to be compatiable with XMLHttpRequest
       abort: function(){
           model.trigger('abort', model, promise, options);
-          io.disconnect();
       }
   });
   model.trigger('request', model, promise, options);
