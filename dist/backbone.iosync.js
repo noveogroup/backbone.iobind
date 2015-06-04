@@ -78,6 +78,13 @@ var socketSync = function (method, model, options) {
   //since Backbone version 1.0.0 all events are raised in methods 'fetch', 'save', 'remove' etc
 
   var defer = $.Deferred();
+  var timeout = params.timeout || $.ajaxSetup().timeout || false;
+  if (timeout) {
+    setTimeout(function () {
+      if (options.error) options.error('Sync operation timed out');
+      defer.reject();
+    }, timeout);
+  }
   io.emit(namespace + ':' + method, params.data, function (err, data) {
     if (err) {
       if(options.error) options.error(err);
