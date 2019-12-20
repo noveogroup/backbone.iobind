@@ -69,7 +69,7 @@ If your url has a depth of more than one, only the first will be used. Example: 
 ### RPC / Callbacks
 
 This replacement assumes that you are using socket.io's RPC (callback) formula for these events.
-Examine this psuedo-code:
+Examine this pseudo-code:
 
 ```js
 socket.on('posts:read', function (data, callback) {
